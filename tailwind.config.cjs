@@ -5,7 +5,17 @@ module.exports = {
     './index.html',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors:{
+        defaultBackground:'#191A1A',
+        softWhite:'#F3F4F8',
+        defaultRed:'#C90707',
+        softGrey:'#535353',
+        defaultOrange:'#FF7A00',
+        softGreen:'#61EF5E',
+        extraSoftGrey:'#D0CFCF'
+      }
+    },
   },
   plugins: [],
 }
