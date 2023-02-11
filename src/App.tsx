@@ -6,11 +6,9 @@ function App() {
   
 
   return (
-    <>
-      <div className='bg-black w-screen h-screen'>
-        <h2>Ola mundo!</h2>
-      </div>
-    </>
+   <div className='h-screen w-screen bg-defaultBackground flex justify-center items-center'>
+    
+   </div>
   )
 }
 
