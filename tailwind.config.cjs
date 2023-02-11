@@ -14,6 +14,9 @@ module.exports = {
         defaultOrange:'#FF7A00',
         softGreen:'#61EF5E',
         extraSoftGrey:'#D0CFCF'
+      },
+      fontFamily:{
+        'roboto-condensed':['"Roboto Condensed"','sans-serif'],
       }
     },
   },
