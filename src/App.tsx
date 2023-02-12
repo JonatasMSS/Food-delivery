@@ -3,6 +3,7 @@ import '../src/styles/global.css';
 import { Header } from './components/Header';
 import Logo from './assets/Logo.svg';
 import { Food } from './components/Food';
+import { BodyContent } from './components/BodyContent';
 
 function App() {
   return (
@@ -14,16 +15,7 @@ function App() {
           Comida feita com amor ❤️
         </span>
       </div>
-
-
-      <div className='bg-softWhite flex flex-col rounded-lg p-2 w-11/12'>
-        <span
-          className='font-roboto-condensed text-xl font-bold border-b-2 border-b-zinc-500'
-        >
-          Selecione o seu pedido
-
-        </span>
-      </div>
+      <BodyContent/>
     </div>
   )
 }
