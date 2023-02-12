@@ -1,6 +1,6 @@
 
 import { Hamburger } from "phosphor-react";
-
+import * as Dialog from '@radix-ui/react-dialog';
 
 interface FoodProps {
     foodImage?: string;
