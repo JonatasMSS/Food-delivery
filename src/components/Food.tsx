@@ -1,4 +1,4 @@
-import Eu from '../assets/Eu.jpeg';
+
 import { Hamburger } from "phosphor-react";
 
 
@@ -18,7 +18,7 @@ export function Food({ foodImage, name = "NO DATA IN TITLE AND INGREDIENTS", ing
 
             {
                 foodImage ?
-                    <img src={foodImage} alt="Imagem da comida" /> :
+                    <img src={foodImage} alt="Imagem da comida" className="w-16 h-16 rounded-lg"/> :
                     <div className='w-16 h-16 rounded-lg'>
                         <Hamburger weight='fill' size={'width:100%'} />
                     </div>
@@ -28,7 +28,9 @@ export function Food({ foodImage, name = "NO DATA IN TITLE AND INGREDIENTS", ing
                 <span className='font-roboto-condensed font-bold'>{name}</span>
                 <span className='font-roboto-condensed text-sm'>
                     {
-                        ...ingredients
+                       ingredients.map(ingredient => (
+                        `| ${ingredient} `
+                       ))
                     }
                 </span>
             </div>
