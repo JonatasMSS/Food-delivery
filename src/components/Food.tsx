@@ -3,7 +3,7 @@ import { Hamburger } from "phosphor-react";
 
 
 interface FoodProps {
-    foodImage: string;
+    foodImage?: string;
     name: string;
     ingredients: Array<string> ;
     price: number;

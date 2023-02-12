@@ -1,6 +1,5 @@
 import { Food } from "./Food";
-import Eu from '../assets/Eu.jpeg';
-import { List } from "phosphor-react";
+
 export function BodyContent(){
 
     
@@ -14,7 +13,7 @@ export function BodyContent(){
 
         </span>
         <Food 
-          foodImage={Eu}
+         
           name='Comida de teste'
           ingredients={['Coxinha','pastel','carne','frango']}
           price={8}
