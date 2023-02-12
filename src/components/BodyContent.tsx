@@ -1,6 +1,10 @@
 import { Food } from "./Food";
 import Eu from '../assets/Eu.jpeg';
+import { List } from "phosphor-react";
 export function BodyContent(){
+
+    
+
     return(
         <div className='bg-softWhite flex flex-col rounded-lg p-2 w-11/12'>
         <span
@@ -9,6 +13,51 @@ export function BodyContent(){
           Selecione o seu pedido
 
         </span>
+        <Food 
+          foodImage={Eu}
+          name='Comida de teste'
+          ingredients={['Coxinha','pastel','carne','frango']}
+          price={8}
+          extras={['Extra 1','Extra 2']}
+          tastes={['Carne','Frango']}
+
+        />
+        <Food 
+          foodImage={Eu}
+          name='Comida de teste'
+          ingredients={['Coxinha','pastel','carne','frango']}
+          price={8}
+          extras={['Extra 1','Extra 2']}
+          tastes={['Carne','Frango']}
+
+        />
+        <Food 
+          foodImage={Eu}
+          name='Comida de teste'
+          ingredients={['Coxinha','pastel','carne','frango']}
+          price={8}
+          extras={['Extra 1','Extra 2']}
+          tastes={['Carne','Frango']}
+
+        />
+        <Food 
+          foodImage={Eu}
+          name='Comida de teste'
+          ingredients={['Coxinha','pastel','carne','frango']}
+          price={8}
+          extras={['Extra 1','Extra 2']}
+          tastes={['Carne','Frango']}
+
+        />
+        <Food 
+          foodImage={Eu}
+          name='Comida de teste'
+          ingredients={['Coxinha','pastel','carne','frango']}
+          price={8}
+          extras={['Extra 1','Extra 2']}
+          tastes={['Carne','Frango']}
+
+        />
         <Food 
           foodImage={Eu}
           name='Comida de teste'
