@@ -1,3 +1,5 @@
+import { Food } from "./Food";
+
 export function BodyContent(){
     return(
         <div className='bg-softWhite flex flex-col rounded-lg p-2 w-11/12'>
@@ -7,6 +9,7 @@ export function BodyContent(){
           Selecione o seu pedido
 
         </span>
+        <Food/>
       </div>
     );
 }
