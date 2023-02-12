@@ -1,20 +1,39 @@
 import Eu from '../assets/Eu.jpeg';
 import { Hamburger } from "phosphor-react";
 
-export function Food() {
+
+interface FoodProps {
+    foodImage: string;
+    name: string;
+    ingredients: Array<string> ;
+    price: number;
+    tastes: Array<string>;
+    extras: Array<string>;
+}
+
+
+export function Food({ foodImage, name = "NO DATA IN TITLE AND INGREDIENTS", ingredients = [], price = 0.00, tastes, extras }: FoodProps) {
     return (
         <div className="flex items-center justify-between w-full bg-white rounded-lg border-2 border-zinc-400 my-3 p-2">
 
-            <div className='w-16 h-16 rounded-lg'>
-                <Hamburger weight='fill' size={'wid'} />
-            </div>
+            {
+                foodImage ?
+                    <img src={foodImage} alt="Imagem da comida" /> :
+                    <div className='w-16 h-16 rounded-lg'>
+                        <Hamburger weight='fill' size={'width:100%'} />
+                    </div>
+            }
 
             <div className='flex w-32 flex-col items-start'>
-                <span className='font-roboto-condensed font-bold'>Pastel de carne</span>
-                <span className='font-roboto-condensed text-sm'>Ingredientes por aqui...</span>
+                <span className='font-roboto-condensed font-bold'>{name}</span>
+                <span className='font-roboto-condensed text-sm'>
+                    {
+                        ...ingredients
+                    }
+                </span>
             </div>
 
-            <span className='font-roboto-condensed text-lg font-bold text-defaultRed '>RS 00,00</span>
+            <span className='font-roboto-condensed text-lg font-bold text-defaultRed '>RS {price.toFixed(2)}</span>
         </div>
     );
 }
