@@ -2,7 +2,7 @@
 import '../src/styles/global.css';
 import { Header } from './components/Header';
 import Logo from './assets/Logo.svg';
-import Heart from './assets/heart.svg';
+
 function App() {
 
 
