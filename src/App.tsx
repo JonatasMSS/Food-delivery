@@ -7,7 +7,7 @@ import { BodyContent } from './components/BodyContent';
 
 function App() {
   return (
-    <div className='h-screen w-screen bg-defaultBackground flex flex-col items-center '>
+    <div className=' w-screen bg-defaultBackground flex flex-col items-center '>
       <Header />
       <div className='flex my-5 w-screen gap-2 justify-around items-center'>
         <img src={Logo} alt="Logo do Site" className='w-1/3' />
