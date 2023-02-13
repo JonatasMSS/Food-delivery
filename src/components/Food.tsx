@@ -7,12 +7,11 @@ interface FoodProps {
     name: string;
     ingredients: Array<string> ;
     price: number;
-    tastes: Array<string>;
-    extras: Array<string>;
+    
 }
 
 
-export function Food({ foodImage, name = "NO DATA IN TITLE AND INGREDIENTS", ingredients = [], price = 0.00, tastes, extras }: FoodProps) {
+export function Food({ foodImage, name = "NO DATA IN TITLE AND INGREDIENTS", ingredients = [], price = 0.00}: FoodProps) {
     return (
         <div className="flex items-center justify-between w-full bg-white rounded-lg border-2 border-zinc-400 my-3 p-2">
 

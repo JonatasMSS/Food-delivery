@@ -1,22 +1,34 @@
 
 import * as Dialog from '@radix-ui/react-dialog';
 import { ArrowLeft, Check } from 'phosphor-react';
-import * as Checkbox from '@radix-ui/react-checkbox';
-import BlackShoppingCart from '../assets/shoppingcart-black.svg';
+import { Hamburger } from "phosphor-react";
 import { Food } from './Food';
-import Bag from '../assets/bag.svg';
-export function FoodDialog() {
+import { FoodDialogForm } from './FoodDialogForm';
+
+
+
+ interface foodDialogProps{
+    foodImage?: string;
+    name:string;
+    ingredients:Array<string>;
+    extras?: Array<string>;
+    price:number;
+
+}
+
+
+export function FoodDialog({foodImage,name,ingredients,price,extras}:foodDialogProps) {
     //TODO: REFACTOR THIS CODE REMOVING EXTRAS AND TASTES FROM FOOD DIALOG
     return (
         <Dialog.Root>
             <Dialog.Trigger>
                 <Food
 
-                    name='Comida de teste'
-                    ingredients={['Coxinha', 'Frango com catupiry']}
-                    price={8}
-                    extras={['Extra 1', 'Extra 2']}
-                    tastes={['Carne', 'Frango']}
+                    foodImage={foodImage}
+                    name={name}
+                    ingredients={ingredients}
+                    price={price}
+                   
 
                 />
             </Dialog.Trigger>
@@ -34,32 +46,27 @@ export function FoodDialog() {
                     </Dialog.Close>
                     {/* BODY CONTENT AFTER */}
                     <div className='flex flex-col items-center pb-5 '>
-                        <div className='w-11/12 h-40 bg-violet-800 my-5 rounded-lg' />
+                        {
+                            foodImage ? <img src={foodImage} alt="Imagem da comida" className='w-11/12 h-40  my-5 rounded-lg'/>:
+                            <Hamburger size={90} weight='bold' className='mt-4'/>
+                        }
                         <div className='flex w-full p-2 justify-around'>
                             <div className='flex flex-col'>
-                                <span className='font-roboto-condensed font-bold text-2xl'>Pastel de Carne</span>
-                                <span className='font-roboto-condensed'>Ingrediente A| Ingrediente B | Ingrediente C</span>
+                                <span className='font-roboto-condensed font-bold text-2xl'>{name}</span>
+                                <span className='font-roboto-condensed'>{
+                                    ingredients.map(ingredient => (
+                                        `| ${ingredient} `
+                                    ))
+                                }</span>
                             </div>
                             <div className='flex justify-center items-center w-32'>
-                                <span className='font-roboto-condensed font-bold text-defaultOrange text-xl'>RS 00,00</span>
+                                <span className='font-roboto-condensed font-bold text-defaultOrange text-xl'>R$ {price.toFixed(2)}</span>
                             </div>
                         </div>
-                        <FoodTastes />
-                        <FoodExtras />
-                        <div className='flex flex-col w-full p-2 justify-start'>
-                            <label htmlFor="observation" >Observações</label>
-                            <textarea
-                                 className='w-full h-32 bg-transparent border-2 border-softGrey rounded-lg placeholder:absolute placeholder:inset-0 placeholder:top-3 placeholder:left-1'
-                                 placeholder='Digite aqui alguma observação...'
-                            />
-                        </div>
-                        <div className='flex w-full p-2 justify-between items-center'>
-                            <span className='font-roboto-condensed font-bold text-base'>Valor Total: RS 00,00</span>
-                            <button className='flex p-1 gap-1 bg-softGreen items-center justify-center rounded-lg font-roboto-condensed'>
-                                <img src={BlackShoppingCart} width={19}/>
-                                Adicionar ao carrinho
-                            </button>
-                        </div>
+                        <FoodDialogForm
+                            ingredients={ingredients}
+                            extras={extras}
+                        />
                     </div>
                 </Dialog.Content>
             </Dialog.Portal>
@@ -69,71 +76,3 @@ export function FoodDialog() {
 
 
 
-
-const FoodExtras = () => {
-    return (
-        <div className='flex flex-col w-full p-2 '>
-            <div className='flex items-center border-t-2 border-black pt-2'>
-                <img src={Bag} alt="Bag" width={42} />
-                <span
-                    className='font-roboto-condensed mt-2 font-normal text-softGrey text-xl'
-                >
-                    Adicionais
-
-                </span>
-            </div>
-            <span className='font-roboto-condensed font-thin ml-2 mt-2'>Escolha os sabores adicionais. + RS 1.00 pela adição de sabor</span>
-
-            <div className='grid grid-flow-row grid-cols-2 mt-2 gap-2 '>
-                <CheckboxFoodItem />
-                <CheckboxFoodItem />
-                <CheckboxFoodItem />
-                <CheckboxFoodItem />
-                <CheckboxFoodItem />
-                <CheckboxFoodItem />
-            </div>
-
-        </div>
-    )
-}
-
-
-const FoodTastes = () => {
-    return (
-        <div className='flex flex-col w-full p-2 '>
-            <div className='flex items-center border-t-2 border-black pt-2'>
-                <img src={Bag} alt="Bag" width={42} />
-                <span
-                    className='font-roboto-condensed mt-2 font-normal text-softGrey text-xl'
-                >
-                    Sabores
-
-                </span>
-            </div>
-            <span className='font-roboto-condensed font-thin ml-2 mt-2'>Escolha 3 sabores includo no pacote.</span>
-
-            <div className='grid grid-flow-row grid-cols-2 mt-2 gap-2 '>
-                <CheckboxFoodItem />
-                <CheckboxFoodItem />
-                <CheckboxFoodItem />
-
-            </div>
-
-        </div>
-    )
-}
-
-const CheckboxFoodItem = () => {
-    return (
-        <div className='flex p-1 items-center gap-2'>
-            <Checkbox.Root>
-                <div className='w-8 h-8 border-zinc-400 border-2 rounded-lg flex items-center justify-center'>
-                    <Checkbox.Indicator>
-                        <Check size={24} weight='bold' />
-                    </Checkbox.Indicator>
-                </div>
-            </Checkbox.Root>
-            <span className='font-roboto-condensed text-lg'>Sabor 1</span>
-        </div>
-    )
-}

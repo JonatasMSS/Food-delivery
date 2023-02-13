@@ -1,6 +1,6 @@
 import { Food } from "./Food";
 import { FoodDialog } from "./FoodDialog";
-
+import Eu from '../assets/Eu.jpeg';
 export function BodyContent(){
 
     
@@ -14,7 +14,21 @@ export function BodyContent(){
 
         </span>
 
-        <FoodDialog/>
+        <FoodDialog
+          
+          name="Pastel frito na hora"
+          ingredients={['Frango','Calabresa','Catupiry','Outro sabor']}
+          extras={['+ Cheddar','+ Catupiry']}
+          price={8}
+        />
+        <FoodDialog
+          
+          name="Hamburguer"
+          ingredients={['Frango','Calabresa','Catupiry','Outro sabor']}
+          extras={['Frango','Calabresa','Catupiry','Carne extra']}
+          price={8}
+        />
+    
     
         
       </div>
