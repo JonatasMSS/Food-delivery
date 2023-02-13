@@ -2,6 +2,7 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { ArrowLeft, Check } from 'phosphor-react';
 import * as Checkbox from '@radix-ui/react-checkbox';
+import BlackShoppingCart from '../assets/shoppingcart-black.svg';
 import { Food } from './Food';
 import Bag from '../assets/bag.svg';
 export function FoodDialog() {
@@ -22,9 +23,9 @@ export function FoodDialog() {
 
             <Dialog.Portal>
                 <Dialog.Overlay
-                    className='w-screen h-screen bg-black/80 fixed inset-0'
+                    className=' w-screen h-screen bg-black/80 fixed inset-0'
                 />
-                <Dialog.Content className='absolute rounded-lg w-10/12 bg-softWhite top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+                <Dialog.Content className='absolute max-h-vh-90 overflow-y-auto rounded-lg w-10/12 bg-softWhite top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
                     <Dialog.Title
                         className='bg-defaultBackground pl-10 text-white p-2 font-roboto-condensed font-bold text-xl'
                     >Escolha de Pedido</Dialog.Title>
@@ -32,7 +33,7 @@ export function FoodDialog() {
                         <ArrowLeft size={25} weight='bold' color='white' />
                     </Dialog.Close>
                     {/* BODY CONTENT AFTER */}
-                    <div className='flex flex-col items-center'>
+                    <div className='flex flex-col items-center pb-5 '>
                         <div className='w-11/12 h-40 bg-violet-800 my-5 rounded-lg' />
                         <div className='flex w-full p-2 justify-around'>
                             <div className='flex flex-col'>
@@ -44,7 +45,21 @@ export function FoodDialog() {
                             </div>
                         </div>
                         <FoodTastes />
-
+                        <FoodExtras />
+                        <div className='flex flex-col w-full p-2 justify-start'>
+                            <label htmlFor="observation" >Observações</label>
+                            <textarea
+                                 className='w-full h-32 bg-transparent border-2 border-softGrey rounded-lg placeholder:absolute placeholder:inset-0 placeholder:top-3 placeholder:left-1'
+                                 placeholder='Digite aqui alguma observação...'
+                            />
+                        </div>
+                        <div className='flex w-full p-2 justify-between items-center'>
+                            <span className='font-roboto-condensed font-bold text-base'>Valor Total: RS 00,00</span>
+                            <button className='flex p-1 gap-1 bg-softGreen items-center justify-center rounded-lg font-roboto-condensed'>
+                                <img src={BlackShoppingCart} width={19}/>
+                                Adicionar ao carrinho
+                            </button>
+                        </div>
                     </div>
                 </Dialog.Content>
             </Dialog.Portal>
@@ -53,6 +68,34 @@ export function FoodDialog() {
 }
 
 
+
+
+const FoodExtras = () => {
+    return (
+        <div className='flex flex-col w-full p-2 '>
+            <div className='flex items-center border-t-2 border-black pt-2'>
+                <img src={Bag} alt="Bag" width={42} />
+                <span
+                    className='font-roboto-condensed mt-2 font-normal text-softGrey text-xl'
+                >
+                    Adicionais
+
+                </span>
+            </div>
+            <span className='font-roboto-condensed font-thin ml-2 mt-2'>Escolha os sabores adicionais. + RS 1.00 pela adição de sabor</span>
+
+            <div className='grid grid-flow-row grid-cols-2 mt-2 gap-2 '>
+                <CheckboxFoodItem />
+                <CheckboxFoodItem />
+                <CheckboxFoodItem />
+                <CheckboxFoodItem />
+                <CheckboxFoodItem />
+                <CheckboxFoodItem />
+            </div>
+
+        </div>
+    )
+}
 
 
 const FoodTastes = () => {
@@ -67,22 +110,30 @@ const FoodTastes = () => {
 
                 </span>
             </div>
-            <span className='font-roboto-condensed font-thin ml-2 mt-2'>Escolha 3 sabores includo no pacote. + RS 1.00 pela adição de sabor</span>
+            <span className='font-roboto-condensed font-thin ml-2 mt-2'>Escolha 3 sabores includo no pacote.</span>
 
-            <div className='grid grid-flow-row grid-rows-3 mt-2'>
-                <div className='flex p-1 items-center gap-2'>
-                    <Checkbox.Root>
-                        <div className='w-8 h-8 border-zinc-400 border-2 rounded-lg flex items-center justify-center'>
-                            <Checkbox.Indicator>
-                                <Check size={24} weight='bold' />
-                            </Checkbox.Indicator>
-                        </div>
-                    </Checkbox.Root>
-                    <span className='font-roboto-condensed text-lg'>Sabor 1</span>
-                </div>
+            <div className='grid grid-flow-row grid-cols-2 mt-2 gap-2 '>
+                <CheckboxFoodItem />
+                <CheckboxFoodItem />
+                <CheckboxFoodItem />
 
             </div>
 
+        </div>
+    )
+}
+
+const CheckboxFoodItem = () => {
+    return (
+        <div className='flex p-1 items-center gap-2'>
+            <Checkbox.Root>
+                <div className='w-8 h-8 border-zinc-400 border-2 rounded-lg flex items-center justify-center'>
+                    <Checkbox.Indicator>
+                        <Check size={24} weight='bold' />
+                    </Checkbox.Indicator>
+                </div>
+            </Checkbox.Root>
+            <span className='font-roboto-condensed text-lg'>Sabor 1</span>
         </div>
     )
 }

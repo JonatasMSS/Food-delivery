@@ -6,6 +6,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      maxHeight:{
+        'vh-80':'80vh',
+        'vh-90':'90vh',
+      },
       colors:{
         defaultBackground:'#191A1A',
         softWhite:'#F3F4F8',
