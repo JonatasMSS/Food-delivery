@@ -1,6 +1,7 @@
 
 import * as Dialog from '@radix-ui/react-dialog';
-import { ArrowLeft } from 'phosphor-react';
+import { ArrowLeft, Check } from 'phosphor-react';
+import * as Checkbox from '@radix-ui/react-checkbox';
 import { Food } from './Food';
 import Bag from '../assets/bag.svg';
 export function FoodDialog() {
@@ -33,7 +34,6 @@ export function FoodDialog() {
                     {/* BODY CONTENT AFTER */}
                     <div className='flex flex-col items-center'>
                         <div className='w-11/12 h-40 bg-violet-800 my-5 rounded-lg' />
-
                         <div className='flex w-full p-2 justify-around'>
                             <div className='flex flex-col'>
                                 <span className='font-roboto-condensed font-bold text-2xl'>Pastel de Carne</span>
@@ -43,7 +43,7 @@ export function FoodDialog() {
                                 <span className='font-roboto-condensed font-bold text-defaultOrange text-xl'>RS 00,00</span>
                             </div>
                         </div>
-                        <FoodTastes/>
+                        <FoodTastes />
 
                     </div>
                 </Dialog.Content>
@@ -67,13 +67,18 @@ const FoodTastes = () => {
 
                 </span>
             </div>
-            <span className='font-roboto-condensed font-thin ml-2 mt-2'>Escolha 3 sabores pelo pedido. + RS 1.00 pela adição de sabor</span>
+            <span className='font-roboto-condensed font-thin ml-2 mt-2'>Escolha 3 sabores includo no pacote. + RS 1.00 pela adição de sabor</span>
 
-            <div className='grid grid-flow-row grid-rows-3'>
-                <div className='flex'>
-                    <div className=''>
-                        
-                    </div>
+            <div className='grid grid-flow-row grid-rows-3 mt-2'>
+                <div className='flex p-1 items-center gap-2'>
+                    <Checkbox.Root>
+                        <div className='w-8 h-8 border-zinc-400 border-2 rounded-lg flex items-center justify-center'>
+                            <Checkbox.Indicator>
+                                <Check size={24} weight='bold' />
+                            </Checkbox.Indicator>
+                        </div>
+                    </Checkbox.Root>
+                    <span className='font-roboto-condensed text-lg'>Sabor 1</span>
                 </div>
 
             </div>
