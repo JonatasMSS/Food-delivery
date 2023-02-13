@@ -24,9 +24,9 @@ export function Food({ foodImage, name = "NO DATA IN TITLE AND INGREDIENTS", ing
                     </div>
             }
 
-            <div className='flex w-32 flex-col items-start'>
+            <div className='flex w-32 flex-col items-center'>
                 <span className='font-roboto-condensed font-bold'>{name}</span>
-                <span className='font-roboto-condensed text-sm'>
+                <span className='font-roboto-condensed w-28 text-sm'>
                     {
                        ingredients.map(ingredient => (
                         `| ${ingredient} `

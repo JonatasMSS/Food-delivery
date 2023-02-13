@@ -1,4 +1,5 @@
 import { Food } from "./Food";
+import { FoodDialog } from "./FoodDialog";
 
 export function BodyContent(){
 
@@ -12,16 +13,9 @@ export function BodyContent(){
           Selecione o seu pedido
 
         </span>
-        <Food 
-         
-          name='Comida de teste'
-          ingredients={['Coxinha','pastel','carne','frango']}
-          price={8}
-          extras={['Extra 1','Extra 2']}
-          tastes={['Carne','Frango']}
 
-        />
-       
+        <FoodDialog/>
+    
         
       </div>
     );
