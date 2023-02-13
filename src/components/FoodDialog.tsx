@@ -58,7 +58,7 @@ export function FoodDialog() {
 const FoodTastes = () => {
     return (
         <div className='flex flex-col w-full p-2 '>
-            <div className='flex items-center border-b-2 border-black pb-2'>
+            <div className='flex items-center border-t-2 border-black pt-2'>
                 <img src={Bag} alt="Bag" width={42} />
                 <span
                     className='font-roboto-condensed mt-2 font-normal text-softGrey text-xl'
@@ -66,7 +66,15 @@ const FoodTastes = () => {
                     Sabores
 
                 </span>
+            </div>
+            <span className='font-roboto-condensed font-thin ml-2 mt-2'>Escolha 3 sabores pelo pedido. + RS 1.00 pela adição de sabor</span>
 
+            <div className='grid grid-flow-row grid-rows-3'>
+                <div className='flex'>
+                    <div className=''>
+                        
+                    </div>
+                </div>
 
             </div>
 
