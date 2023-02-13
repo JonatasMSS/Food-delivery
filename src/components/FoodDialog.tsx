@@ -18,7 +18,7 @@ import { FoodDialogForm } from './FoodDialogForm';
 
 
 export function FoodDialog({foodImage,name,ingredients,price,extras}:foodDialogProps) {
-    //TODO: REFACTOR THIS CODE REMOVING EXTRAS AND TASTES FROM FOOD DIALOG
+    
     return (
         <Dialog.Root>
             <Dialog.Trigger>

@@ -2,6 +2,7 @@ import { Check } from "phosphor-react"
 import * as Checkbox from '@radix-ui/react-checkbox';
 import BlackShoppingCart from '../assets/shoppingcart-black.svg';
 import Bag from '../assets/bag.svg';
+import { FormEvent, useState } from "react";
 
 
 interface foodDialogFormProps {
@@ -12,13 +13,39 @@ interface foodDialogFormProps {
 
 
 export function FoodDialogForm({ ingredients, extras }: foodDialogFormProps) {
+
+    const [tasteSelected,setTasteSelected] = useState<string[]>([]);
+    const [foodObservation, setFoodObservation] = useState('');
+
+    
+
+    
+
+
+    function sendFoodToOrder(event:FormEvent){
+        event.preventDefault();
+        
+        console.log({
+            'Foods':tasteSelected,
+            'Observation': foodObservation
+        });
+
+        setTasteSelected([]);
+        setFoodObservation('');
+
+        alert('Comida adicionada ao carrinho!');
+    }
+
+
     return (
-        <form>
-            <FoodTastes tastes={ingredients} />
+        <form onSubmit={sendFoodToOrder}>
+            <FoodTastes tastesInCheckbox={tasteSelected} setTastesToCheckbox={setTasteSelected} tastes={ingredients} />
             <FoodExtras extras={extras}/>
             <div className='flex flex-col w-full p-2 justify-start'>
                 <label htmlFor="observation" >Observações</label>
                 <textarea
+                    value={foodObservation}
+                    onChange={event => setFoodObservation(event.target.value)}
                     className='w-full h-32 bg-transparent border-2 border-softGrey rounded-lg placeholder:absolute placeholder:inset-0 placeholder:top-3 placeholder:left-1'
                     placeholder='Digite aqui alguma observação...'
                 />
@@ -38,6 +65,7 @@ export function FoodDialogForm({ ingredients, extras }: foodDialogFormProps) {
 
 interface FoodExtrasProps {
     extras?: Array<string>;
+
 }
 
 const FoodExtras = ({ extras }: FoodExtrasProps) => {
@@ -61,7 +89,7 @@ const FoodExtras = ({ extras }: FoodExtrasProps) => {
                         <div className='grid grid-flow-row grid-cols-2 mt-2 gap-2 '>
                             {
                                 extras.map((extra, index) => (
-                                    <CheckboxFoodItem key={index} value={extra} />
+                                    ''
                                 ))
                             }
                         </div>
@@ -79,9 +107,23 @@ const FoodExtras = ({ extras }: FoodExtrasProps) => {
 
 interface FoodTastesProps {
     tastes: Array<string>;
+    tastesInCheckbox: Array<string>;
+    setTastesToCheckbox:React.Dispatch<React.SetStateAction<string[]>>; 
 }
 
-const FoodTastes = ({ tastes }: FoodTastesProps) => {
+const FoodTastes = ({ tastes,tastesInCheckbox,setTastesToCheckbox}: FoodTastesProps) => {
+
+    function putFoodSelected(taste:string){
+        if(tastesInCheckbox.includes(taste)){
+            const newFoodSelectedWithRemovedOne = tastesInCheckbox.filter(food => food !== taste);
+            setTastesToCheckbox(newFoodSelectedWithRemovedOne);
+        }
+        else{
+            const newFoodList = [...tastesInCheckbox,taste];
+            setTastesToCheckbox(newFoodList);
+        }
+    }
+
     return (
         <div className='flex flex-col w-full p-2 '>
             <div className='flex items-center border-t-2 border-black pt-2'>
@@ -97,8 +139,8 @@ const FoodTastes = ({ tastes }: FoodTastesProps) => {
 
             <div className='grid grid-flow-row grid-cols-2 mt-2 gap-2 '>
                 {
-                    tastes.map(taste => (
-                        <CheckboxFoodItem value={taste} />
+                    tastes.map((taste,index) => (
+                        <CheckboxFoodItem isChecked={tastesInCheckbox.includes(taste)} onCheckedFunction={putFoodSelected} value={taste} key={index}/>
                     ))
                 }
 
@@ -113,15 +155,21 @@ const FoodTastes = ({ tastes }: FoodTastesProps) => {
 
 interface checkBoxFoodItem {
     value: string;
+    onCheckedFunction(value:string):void; 
+    isChecked:boolean;
 }
 
-const CheckboxFoodItem = ({ value }: checkBoxFoodItem) => {
+const CheckboxFoodItem = ({ value,onCheckedFunction,isChecked }: checkBoxFoodItem) => {
     return (
         <div className='flex p-1 items-center gap-2'>
-            <Checkbox.Root>
+            <Checkbox.Root
+                onCheckedChange={() => onCheckedFunction(value)}
+                checked={isChecked}
+            >
                 <div className='w-8 h-8 border-zinc-400 border-2 rounded-lg flex items-center justify-center'>
                     <Checkbox.Indicator>
                         <Check size={24} weight='bold' />
+                        
                     </Checkbox.Indicator>
                 </div>
             </Checkbox.Root>
