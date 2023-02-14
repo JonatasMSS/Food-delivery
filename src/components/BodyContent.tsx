@@ -17,17 +17,21 @@ export function BodyContent(){
         <FoodDialog
           
           name="Pastel frito na hora"
-          ingredients={['Frango','Calabresa','Catupiry','Outro sabor']}
+          tastes={[
+            {
+              tasteName:'Taste name 1',
+              tastePrice:8.50
+            },
+            {
+              tasteName:'Taste name 2',
+              tastePrice:9.50
+            },
+            
+          ]}
           extras={['+ Cheddar','+ Catupiry']}
           price={8}
         />
-        <FoodDialog
-          
-          name="Hamburguer"
-          ingredients={['Frango','Calabresa','Catupiry','Outro sabor']}
-          extras={['Frango','Calabresa','Catupiry','Carne extra']}
-          price={8}
-        />
+        
     
     
         

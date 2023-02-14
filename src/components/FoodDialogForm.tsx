@@ -6,14 +6,17 @@ import { FormEvent, useState } from "react";
 
 
 interface foodDialogFormProps {
-    ingredients: Array<string>;
+    tastes: Array<{
+        tasteName:string,
+        tastePrice:number
+    }>;
     extras?: Array<string>;
 }
 
 
 
 
-export function FoodDialogForm({ ingredients, extras }: foodDialogFormProps) {
+export function FoodDialogForm({ tastes, extras }: foodDialogFormProps) {
 
     const [tasteSelected,setTasteSelected] = useState<string[]>([]);
     const [foodObservation, setFoodObservation] = useState('');
@@ -40,7 +43,7 @@ export function FoodDialogForm({ ingredients, extras }: foodDialogFormProps) {
 
     return (
         <form onSubmit={sendFoodToOrder}>
-            <FoodTastes tastesInCheckbox={tasteSelected} setTastesToCheckbox={setTasteSelected} tastes={ingredients} />
+            <FoodTastes tastesInCheckbox={tasteSelected} setTastesToCheckbox={setTasteSelected} tastes={tastes} />
             <FoodExtras extras={extras}/>
             <div className='flex flex-col w-full p-2 justify-start'>
                 <label htmlFor="observation" >Observações</label>
@@ -107,7 +110,10 @@ const FoodExtras = ({ extras }: FoodExtrasProps) => {
 
 
 interface FoodTastesProps {
-    tastes: Array<string>;
+    tastes: Array<{
+        tasteName:string,
+        tastePrice:number;
+    }>;
     tastesInCheckbox: Array<string>;
     setTastesToCheckbox:React.Dispatch<React.SetStateAction<string[]>>; 
 }
@@ -140,9 +146,11 @@ const FoodTastes = ({ tastes,tastesInCheckbox,setTastesToCheckbox}: FoodTastesPr
 
             <div className='grid grid-flow-row grid-cols-2 mt-2 gap-2 '>
                 {
-                    tastes.map((taste,index) => (
-                        <CheckboxFoodItem isChecked={tastesInCheckbox.includes(taste)} onCheckedFunction={putFoodSelected} value={taste} key={index}/>
-                    ))
+                    tastes.map(taste => {
+                        const {tasteName,tastePrice} = taste;
+
+                        return <CheckboxFoodItem taste={{name:tasteName,price:tastePrice}} onCheckedFunction={putFoodSelected} isChecked={tastesInCheckbox.includes(tasteName)}/>
+                    })
                 }
 
             </div>
@@ -155,16 +163,19 @@ const FoodTastes = ({ tastes,tastesInCheckbox,setTastesToCheckbox}: FoodTastesPr
 
 
 interface checkBoxFoodItem {
-    value: string;
-    onCheckedFunction(value:string):void; 
+    taste:{
+        name:string,
+        price:number,
+    };
+    onCheckedFunction(taste:string):void; 
     isChecked:boolean;
 }
 
-const CheckboxFoodItem = ({ value,onCheckedFunction,isChecked }: checkBoxFoodItem) => {
+const CheckboxFoodItem = ({ taste,onCheckedFunction,isChecked }: checkBoxFoodItem) => {
     return (
         <div className='flex p-1 items-center gap-2'>
             <Checkbox.Root
-                onCheckedChange={() => onCheckedFunction(value)}
+                onCheckedChange={() => onCheckedFunction(taste.name)}
                 checked={isChecked}
             >
                 <div className='w-8 h-8 border-zinc-400 border-2 rounded-lg flex items-center justify-center'>
@@ -174,7 +185,7 @@ const CheckboxFoodItem = ({ value,onCheckedFunction,isChecked }: checkBoxFoodIte
                     </Checkbox.Indicator>
                 </div>
             </Checkbox.Root>
-            <span className='font-roboto-condensed text-lg'>{value}</span>
+            <span className='font-roboto-condensed text-lg'>{taste.name}</span>
         </div>
     )
 }

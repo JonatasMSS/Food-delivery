@@ -10,15 +10,21 @@ import { FoodDialogForm } from './FoodDialogForm';
  interface foodDialogProps{
     foodImage?: string;
     name:string;
-    ingredients:Array<string>;
+    tastes:Array<{
+        tasteName: string,
+        tastePrice:number
+    }>;
     extras?: Array<string>;
     price:number;
 
 }
 
 
-export function FoodDialog({foodImage,name,ingredients,price,extras}:foodDialogProps) {
+export function FoodDialog({foodImage,name,tastes,price,extras}:foodDialogProps) {
     
+    const tastesToFood:string[] = tastes.map((taste) => taste.tasteName);
+    
+   
     return (
         <Dialog.Root>
             <Dialog.Trigger>
@@ -26,7 +32,7 @@ export function FoodDialog({foodImage,name,ingredients,price,extras}:foodDialogP
 
                     foodImage={foodImage}
                     name={name}
-                    ingredients={ingredients}
+                    tastes={tastesToFood}
                     price={price}
                    
 
@@ -53,9 +59,9 @@ export function FoodDialog({foodImage,name,ingredients,price,extras}:foodDialogP
                         <div className='flex w-full p-2 justify-around'>
                             <div className='flex flex-col'>
                                 <span className='font-roboto-condensed font-bold text-2xl'>{name}</span>
-                                <span className='font-roboto-condensed'>{
-                                    ingredients.map(ingredient => (
-                                        `| ${ingredient} `
+                                <span className='font-roboto-condensed '>{
+                                    tastes.map(ingredient => (
+                                        `| ${ingredient.tasteName} `
                                     ))
                                 }</span>
                             </div>
@@ -64,7 +70,7 @@ export function FoodDialog({foodImage,name,ingredients,price,extras}:foodDialogP
                             </div>
                         </div>
                         <FoodDialogForm
-                            ingredients={ingredients}
+                            tastes={tastes}
                             extras={extras}
                         />
                     </div>
