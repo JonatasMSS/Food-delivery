@@ -22,7 +22,10 @@ export function CartDialog() {
                     </Dialog.Title>
 
                     <div className="w-full max-h-full p-2 flex flex-col">
-                        <CartFoodContainer/>
+                        <CartFoodContainer
+                            name="Pastel de Frango"
+                            price={8.00}
+                        />
                     </div>
                 </Dialog.Content>
             </Dialog.Portal>
