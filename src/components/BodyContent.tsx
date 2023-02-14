@@ -19,11 +19,11 @@ export function BodyContent(){
           name="Pastel frito na hora"
           tastes={[
             {
-              tasteName:'Taste name 1',
+              tasteName:'Taste 1',
               tastePrice:8.50
             },
             {
-              tasteName:'Taste name 2',
+              tasteName:'Taste 2',
               tastePrice:9.50
             },
             
