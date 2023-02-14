@@ -21,7 +21,7 @@ export function FoodDialogForm({ tastes, extras }: foodDialogFormProps) {
     const [tasteSelected,setTasteSelected] = useState<string[]>([]);
     const [foodObservation, setFoodObservation] = useState('');
     const [extraSelected,setExtraSelected] = useState<string[]>([]);
-    
+    const [priceListToTotal,setPriceListToTotal] = useState<number[]>([]);
 
     
 
