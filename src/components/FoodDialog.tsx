@@ -71,7 +71,8 @@ export function FoodDialog({foodImage,name,tastes,price,extras}:foodDialogProps)
                         </div>
                         <FoodDialogForm
                             tastes={tastes}
-                            extras={extras}
+                            extras={[]}
+                            foodPriceWithoutTastesAndExtras={price}
                         />
                     </div>
                 </Dialog.Content>

@@ -2,28 +2,34 @@ import { Check } from "phosphor-react"
 import * as Checkbox from '@radix-ui/react-checkbox';
 import BlackShoppingCart from '../assets/shoppingcart-black.svg';
 import Bag from '../assets/bag.svg';
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 
 interface foodDialogFormProps {
+    foodPriceWithoutTastesAndExtras:number
     tastes: Array<{
         tasteName:string,
         tastePrice:number
     }>;
-    extras?: Array<string>;
+    extras?: Array<{
+        extraName:string,
+        extraPrice:number
+    }>;
 }
 
 
 
 
-export function FoodDialogForm({ tastes, extras }: foodDialogFormProps) {
+export function FoodDialogForm({ tastes, extras,foodPriceWithoutTastesAndExtras }: foodDialogFormProps) {
 
     const [tasteSelected,setTasteSelected] = useState<string[]>([]);
     const [foodObservation, setFoodObservation] = useState('');
     const [extraSelected,setExtraSelected] = useState<string[]>([]);
     const [priceListToTotal,setPriceListToTotal] = useState<number[]>([]);
 
-    
+    useEffect(()=>{
+        setPriceListToTotal([foodPriceWithoutTastesAndExtras]);
+    },[]);
 
 
     function sendFoodToOrder(event:FormEvent){
@@ -32,7 +38,8 @@ export function FoodDialogForm({ tastes, extras }: foodDialogFormProps) {
         console.log({
             'Foods':tasteSelected,
             'Observation': foodObservation,
-            'Extras':extraSelected
+            'Extras':extraSelected,
+            'Valor total Pedido':priceListToTotal.reduce((a,b)=> a+b ,0)
         });
 
         setTasteSelected([]);
@@ -44,7 +51,7 @@ export function FoodDialogForm({ tastes, extras }: foodDialogFormProps) {
 
     return (
         <form onSubmit={sendFoodToOrder}>
-            <FoodTastes tastesInCheckbox={tasteSelected} setTastesToCheckbox={setTasteSelected} tastes={tastes} />
+            <FoodTastes tastesInCheckbox={tasteSelected} pricesListToTotal={priceListToTotal} setTastePriceToPriceList={setPriceListToTotal} setTastesToCheckbox={setTasteSelected} tastes={tastes} />
             <FoodExtras extras={[{extraName:'Extra 1',extraPrice:1.00}]}
                 extrasInCheckbox={extraSelected}
                 putExtraToCheckboxArray={setExtraSelected}
@@ -130,19 +137,25 @@ interface FoodTastesProps {
         tastePrice:number;
     }>;
     tastesInCheckbox: Array<string>;
+    pricesListToTotal: Array<number>;
     setTastesToCheckbox:React.Dispatch<React.SetStateAction<string[]>>; 
+    setTastePriceToPriceList:React.Dispatch<React.SetStateAction<number[]>>; 
 }
 
-const FoodTastes = ({ tastes,tastesInCheckbox,setTastesToCheckbox}: FoodTastesProps) => {
+const FoodTastes = ({ tastes,tastesInCheckbox,pricesListToTotal,setTastesToCheckbox,setTastePriceToPriceList}: FoodTastesProps) => {
 
-    function putFoodSelected(taste:string){
+    function putFoodSelected(taste:string,tastePrice:number){
         if(tastesInCheckbox.includes(taste)){
             const newFoodSelectedWithRemovedOne = tastesInCheckbox.filter(food => food !== taste);
+            const newPriceListWithRemovedOne = pricesListToTotal.filter(price => price !== tastePrice);
             setTastesToCheckbox(newFoodSelectedWithRemovedOne);
+            setTastePriceToPriceList(newPriceListWithRemovedOne);
         }
         else{
             const newFoodList = [...tastesInCheckbox,taste];
+            const newPriceList = [...pricesListToTotal,tastePrice];
             setTastesToCheckbox(newFoodList);
+            setTastePriceToPriceList(newPriceList);
         }
     }
 
@@ -182,7 +195,7 @@ interface checkBoxFoodItem {
         name:string,
         price:number,
     };
-    onCheckedFunction(taste:string):void; 
+    onCheckedFunction(taste:string,tastePrice:number):void; 
     isChecked:boolean;
 }
 
@@ -190,7 +203,7 @@ const CheckboxFoodItem = ({ taste,onCheckedFunction,isChecked }: checkBoxFoodIte
     return (
         <div className='flex justify-between items-center gap-2'>
             <Checkbox.Root
-                onCheckedChange={() => onCheckedFunction(taste.name)}
+                onCheckedChange={() => onCheckedFunction(taste.name,taste.price)}
                 checked={isChecked}
             >
                 <div className='w-8 h-8 border-zinc-400 border-2 rounded-lg flex items-center justify-center'>
