@@ -3,15 +3,6 @@ import { Hamburger, X, ArrowDown } from 'phosphor-react';
 import * as Collapsible from '@radix-ui/react-collapsible';
 import { useState } from 'react';
 
-interface CardFoodContainerProps {
-    foodImage?: string;
-    name: string;
-    price: number;
-    tastes: Array<string>;
-    onRemoveClicked(index:number):void;
-}
-
-
 
 export function CartFoodContainer({ foodImage, name, price, tastes, onRemoveClicked}: CardFoodContainerProps) {
 

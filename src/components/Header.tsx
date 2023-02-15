@@ -1,7 +1,7 @@
 import Whatsapp from '../assets/whatsapp.svg';
 import Instagram from '../assets/instagram.svg';
 import Logo from '../assets/Logo.svg';
-import { CartDialog } from './CartDialog';
+import { CartDialog } from './dialogs/CartDialog';
 
 export function Header(){
     return(

@@ -4,22 +4,6 @@ import BlackShoppingCart from '../assets/shoppingcart-black.svg';
 import Bag from '../assets/bag.svg';
 import { FormEvent, useEffect, useState } from "react";
 
-
-interface foodDialogFormProps {
-    foodPriceWithoutTastesAndExtras:number
-    tastes: Array<{
-        tasteName:string,
-        tastePrice:number
-    }>;
-    extras?: Array<{
-        extraName:string,
-        extraPrice:number
-    }>;
-}
-
-
-
-
 export function FoodDialogForm({ tastes, extras,foodPriceWithoutTastesAndExtras }: foodDialogFormProps) {
 
     const [tasteSelected,setTasteSelected] = useState<string[]>([]);
@@ -79,16 +63,6 @@ export function FoodDialogForm({ tastes, extras,foodPriceWithoutTastesAndExtras 
 
 
 
-interface FoodExtrasProps {
-    extras?: Array<{
-        extraName:string,
-        extraPrice:number;
-    }>;
-    extrasInCheckbox:Array<string>;
-    putExtraToCheckboxArray:React.Dispatch<React.SetStateAction<string[]>>;
-    
-}
-
 const FoodExtras = ({extras,extrasInCheckbox,putExtraToCheckboxArray}:FoodExtrasProps) => {
 
     function putFoodSelected(taste:string){
@@ -128,18 +102,6 @@ const FoodExtras = ({extras,extrasInCheckbox,putExtraToCheckboxArray}:FoodExtras
 
         </div>
     )
-}
-
-
-interface FoodTastesProps {
-    tastes: Array<{
-        tasteName:string,
-        tastePrice:number;
-    }>;
-    tastesInCheckbox: Array<string>;
-    pricesListToTotal: Array<number>;
-    setTastesToCheckbox:React.Dispatch<React.SetStateAction<string[]>>; 
-    setTastePriceToPriceList:React.Dispatch<React.SetStateAction<number[]>>; 
 }
 
 const FoodTastes = ({ tastes,tastesInCheckbox,pricesListToTotal,setTastesToCheckbox,setTastePriceToPriceList}: FoodTastesProps) => {
@@ -185,18 +147,6 @@ const FoodTastes = ({ tastes,tastesInCheckbox,pricesListToTotal,setTastesToCheck
 
         </div>
     )
-}
-
-
-
-
-interface checkBoxFoodItem {
-    taste:{
-        name:string,
-        price:number,
-    };
-    onCheckedFunction(taste:string,tastePrice:number):void; 
-    isChecked:boolean;
 }
 
 const CheckboxFoodItem = ({ taste,onCheckedFunction,isChecked }: checkBoxFoodItem) => {

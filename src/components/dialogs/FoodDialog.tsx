@@ -2,25 +2,9 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { ArrowLeft, Check } from 'phosphor-react';
 import { Hamburger } from "phosphor-react";
-import { Food } from './Food';
+import { Food } from '../Food';
 import { FoodDialogForm } from './FoodDialogForm';
 import { useEffect } from 'react';
-import { listaComida } from '../controller/foodToOrderController';
-
-
-
- interface foodDialogProps{
-    foodImage?: string;
-    name:string;
-    tastes:Array<{
-        tasteName: string,
-        tastePrice:number
-    }>;
-    extras?: Array<string>;
-    price:number;
-
-}
-
 
 export function FoodDialog({foodImage,name,tastes,price,extras}:foodDialogProps) {
     

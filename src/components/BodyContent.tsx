@@ -1,5 +1,5 @@
 import { Food } from "./Food";
-import { FoodDialog } from "./FoodDialog";
+import { FoodDialog } from "./dialogs/FoodDialog";
 import Eu from '../assets/Eu.jpeg';
 export function BodyContent(){
 

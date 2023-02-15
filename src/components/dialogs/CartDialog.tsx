@@ -3,9 +3,8 @@ import * as Dialog from "@radix-ui/react-dialog";
 import Carrinho from '../assets/shoppingcart.svg';
 import BlackCarrinho from '../assets/shoppingcart-black.svg';
 import { ArrowLeft, } from 'phosphor-react';
-import { CartFoodContainer } from "./CartFoodContainer";
+import { CartFoodContainer } from "../CartFoodContainer";
 import { useEffect, useState } from "react";
-import { listaComida } from "../controller/foodToOrderController";
 
 
 interface CartFoodProp{
