@@ -14,7 +14,26 @@ export function Header(){
             <img src={Logo} alt="Logo do app" className='w-12'/>
           </div>
           <div className='p-2 my-2 rounded-lg  items-center bg-softWhite'>
-            <CartDialog/>
+            <CartDialog
+              foodsToOrder={
+                [
+                  {
+                    name:'Pastel frito na hora',
+                    price:8.00,
+                    tastes:['Frango','Catupiry','Calabresa','Cheddar']
+
+
+                  },
+                  {
+                    name:'Sanduiches',
+                    price:28.00,
+                    tastes:['X-misto','X-Bacon','X-Calabresa','X-Cheddar']
+                    
+
+                  }
+                ]
+              }
+            />
           </div>
         </div>
     )

@@ -4,6 +4,8 @@ import { ArrowLeft, Check } from 'phosphor-react';
 import { Hamburger } from "phosphor-react";
 import { Food } from './Food';
 import { FoodDialogForm } from './FoodDialogForm';
+import { useEffect } from 'react';
+import { listaComida } from '../controller/foodToOrderController';
 
 
 
@@ -24,7 +26,10 @@ export function FoodDialog({foodImage,name,tastes,price,extras}:foodDialogProps)
     
     const tastesToFood:string[] = tastes.map((taste) => taste.tasteName);
     
-   
+    useEffect(()=>{
+        
+    },[])
+
     return (
         <Dialog.Root>
             <Dialog.Trigger>
