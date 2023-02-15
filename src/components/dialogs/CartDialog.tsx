@@ -1,7 +1,7 @@
 
 import * as Dialog from "@radix-ui/react-dialog";
-import Carrinho from '../assets/shoppingcart.svg';
-import BlackCarrinho from '../assets/shoppingcart-black.svg';
+import Carrinho from '../../assets/shoppingcart.svg';
+import BlackCarrinho from '../../assets/shoppingcart-black.svg';
 import { ArrowLeft, } from 'phosphor-react';
 import { CartFoodContainer } from "../CartFoodContainer";
 import { useEffect, useState } from "react";
@@ -18,7 +18,7 @@ interface CartFoodProp{
 
 
 export function CartDialog({foodsToOrder}:CartFoodProp) {
-    //TODO: ADD CHANGE ICON WHEN CLICK   
+    
     return (
         <Dialog.Root>
             <Dialog.Trigger className="flex">

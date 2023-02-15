@@ -1,12 +1,12 @@
 import { Check } from "phosphor-react"
 import * as Checkbox from '@radix-ui/react-checkbox';
-import BlackShoppingCart from '../assets/shoppingcart-black.svg';
-import Bag from '../assets/bag.svg';
+import BlackShoppingCart from '../../assets/shoppingcart-black.svg';
+import Bag from '../../assets/bag.svg';
 import { FormEvent, useEffect, useState } from "react";
 
-export function FoodDialogForm({ tastes, extras,foodPriceWithoutTastesAndExtras }: foodDialogFormProps) {
+export function FoodDialogForm({ tastes,foodPriceWithoutTastesAndExtras }: foodDialogFormProps) {
 
-    const [tasteSelected,setTasteSelected] = useState<string[]>([]);
+    const [freeTasteSelected,setTasteSelected] = useState<string[]>([]);
     const [foodObservation, setFoodObservation] = useState('');
     const [extraSelected,setExtraSelected] = useState<string[]>([]);
     const [priceListToTotal,setPriceListToTotal] = useState<number[]>([]);
@@ -20,7 +20,7 @@ export function FoodDialogForm({ tastes, extras,foodPriceWithoutTastesAndExtras 
         event.preventDefault();
         
         console.log({
-            'Foods':tasteSelected,
+            'Foods':freeTasteSelected,
             'Observation': foodObservation,
             'Extras':extraSelected,
             'Valor total Pedido':priceListToTotal.reduce((a,b)=> a+b ,0)
@@ -35,12 +35,7 @@ export function FoodDialogForm({ tastes, extras,foodPriceWithoutTastesAndExtras 
 
     return (
         <form onSubmit={sendFoodToOrder}>
-            <FoodTastes tastesInCheckbox={tasteSelected} pricesListToTotal={priceListToTotal} setTastePriceToPriceList={setPriceListToTotal} setTastesToCheckbox={setTasteSelected} tastes={tastes} />
-            <FoodExtras extras={[{extraName:'Extra 1',extraPrice:1.00}]}
-                extrasInCheckbox={extraSelected}
-                putExtraToCheckboxArray={setExtraSelected}
-
-            />
+            <FoodTastes freeTastesCheckboxedInList={freeTasteSelected} pricesListToTotal={priceListToTotal} setTastePriceToPriceList={setPriceListToTotal} setTastesCheckboxedToList={setTasteSelected} tastes={tastes} />
             <div className='flex flex-col w-full p-2 justify-start'>
                 <label htmlFor="observation" >Observações</label>
                 <textarea
@@ -50,9 +45,9 @@ export function FoodDialogForm({ tastes, extras,foodPriceWithoutTastesAndExtras 
                     placeholder='Digite aqui alguma observação...'
                 />
             </div>
-            <div className='flex w-full p-2 justify-between items-center gap-2'>
+            <div className='flex w-full p-2 justify-between items-center gap-3'>
                 <span className='font-roboto-condensed font-bold text-base'>Valor Total: RS 00,00</span>
-                <button className='flex p-1 gap-1 bg-softGreen items-center justify-center rounded-lg font-roboto-condensed'>
+                <button className='flex p-1  bg-softGreen items-center justify-center rounded-lg font-roboto-condensed'>
                     <img src={BlackShoppingCart} width={19} />
                     Adicionar ao carrinho
                 </button>
@@ -62,7 +57,7 @@ export function FoodDialogForm({ tastes, extras,foodPriceWithoutTastesAndExtras 
 }
 
 
-
+//TODO: TO REMOVE
 const FoodExtras = ({extras,extrasInCheckbox,putExtraToCheckboxArray}:FoodExtrasProps) => {
 
     function putFoodSelected(taste:string){
@@ -104,19 +99,19 @@ const FoodExtras = ({extras,extrasInCheckbox,putExtraToCheckboxArray}:FoodExtras
     )
 }
 
-const FoodTastes = ({ tastes,tastesInCheckbox,pricesListToTotal,setTastesToCheckbox,setTastePriceToPriceList}: FoodTastesProps) => {
+const FoodTastes = ({ tastes,freeTastesCheckboxedInList,pricesListToTotal,setTastesCheckboxedToList,setTastePriceToPriceList}: FoodTastesProps) => {
 
     function putFoodSelected(taste:string,tastePrice:number){
-        if(tastesInCheckbox.includes(taste)){
-            const newFoodSelectedWithRemovedOne = tastesInCheckbox.filter(food => food !== taste);
+        if(freeTastesCheckboxedInList.includes(taste)){
+            const newFoodSelectedWithRemovedOne = freeTastesCheckboxedInList.filter(food => food !== taste);
             const newPriceListWithRemovedOne = pricesListToTotal.filter(price => price !== tastePrice);
-            setTastesToCheckbox(newFoodSelectedWithRemovedOne);
+            setTastesCheckboxedToList(newFoodSelectedWithRemovedOne);
             setTastePriceToPriceList(newPriceListWithRemovedOne);
         }
         else{
-            const newFoodList = [...tastesInCheckbox,taste];
+            const newFoodList = [...freeTastesCheckboxedInList,taste];
             const newPriceList = [...pricesListToTotal,tastePrice];
-            setTastesToCheckbox(newFoodList);
+            setTastesCheckboxedToList(newFoodList);
             setTastePriceToPriceList(newPriceList);
         }
     }
@@ -132,14 +127,14 @@ const FoodTastes = ({ tastes,tastesInCheckbox,pricesListToTotal,setTastesToCheck
 
                 </span>
             </div>
-            <span className='font-roboto-condensed font-thin ml-2 mt-2'>Escolha 3 sabores includo no pacote.</span>
+            <span className='font-roboto-condensed font-thin ml-2 mt-2'>Escolha 3 sabores includo no pacote.<span className="font-roboto-condensed font-bold">+ R$ 1,00 por escolha adicional</span></span>
 
             <div className='grid grid-flow-row grid-cols-2 mt-2 gap-2 '>
                 {
                     tastes.map((taste,index) => {
                         const {tasteName,tastePrice} = taste;
 
-                        return <CheckboxFoodItem key={index} taste={{name:tasteName,price:tastePrice}} onCheckedFunction={putFoodSelected} isChecked={tastesInCheckbox.includes(tasteName)}/>
+                        return <CheckboxFoodItem key={index}  taste={{name:tasteName,price:tastePrice}} onCheckedFunction={putFoodSelected} isChecked={freeTastesCheckboxedInList.includes(tasteName)}/>
                     })
                 }
 
@@ -149,9 +144,9 @@ const FoodTastes = ({ tastes,tastesInCheckbox,pricesListToTotal,setTastesToCheck
     )
 }
 
-const CheckboxFoodItem = ({ taste,onCheckedFunction,isChecked }: checkBoxFoodItem) => {
+const CheckboxFoodItem = ({ taste,onCheckedFunction,isChecked,showPrice = false }: checkBoxFoodItem) => {
     return (
-        <div className='flex justify-between items-center gap-2'>
+        <div className='flex justify-start items-center gap-2'>
             <Checkbox.Root
                 onCheckedChange={() => onCheckedFunction(taste.name,taste.price)}
                 checked={isChecked}
@@ -164,7 +159,9 @@ const CheckboxFoodItem = ({ taste,onCheckedFunction,isChecked }: checkBoxFoodIte
                 </div>
             </Checkbox.Root>
             <span className='font-roboto-condensed text-lg whitespace-nowrap'>{taste.name}</span>
-            <span className="font-roboto-condensed text-sm whitespace-nowrap">R$ {taste.price.toFixed(2)}</span>
+            {
+                showPrice && <span className="font-roboto-condensed text-sm whitespace-nowrap">R$ {taste.price.toFixed(2)}</span>
+            }
         </div>
     )
 }

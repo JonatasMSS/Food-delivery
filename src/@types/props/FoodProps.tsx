@@ -35,15 +35,16 @@ interface checkBoxFoodItem {
     };
     onCheckedFunction(taste:string,tastePrice:number):void; 
     isChecked:boolean;
+    showPrice?:boolean;
 }
 interface FoodTastesProps {
     tastes: Array<{
         tasteName:string,
         tastePrice:number;
     }>;
-    tastesInCheckbox: Array<string>;
+    freeTastesCheckboxedInList: Array<string>;
     pricesListToTotal: Array<number>;
-    setTastesToCheckbox:React.Dispatch<React.SetStateAction<string[]>>; 
+    setTastesCheckboxedToList:React.Dispatch<React.SetStateAction<string[]>>; 
     setTastePriceToPriceList:React.Dispatch<React.SetStateAction<number[]>>; 
 }
 interface FoodExtrasProps {
