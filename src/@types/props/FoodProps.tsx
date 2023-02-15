@@ -6,7 +6,6 @@ interface foodDialogProps{
         tasteName: string,
         tastePrice:number
     }>;
-    extras?: Array<string>;
     price:number;
 
 }

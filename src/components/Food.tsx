@@ -1,6 +1,9 @@
 
 import { Hamburger } from "phosphor-react";
 import * as Dialog from '@radix-ui/react-dialog';
+import { CartDialog } from "./dialogs/CartDialog";
+
+
 
 
 export function Food({ foodImage, name = "NO DATA IN TITLE AND INGREDIENTS", tastes = [], price = 0.00}: FoodProps) {

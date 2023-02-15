@@ -1,6 +1,7 @@
 import { Food } from "./Food";
 import { FoodDialog } from "./dialogs/FoodDialog";
 import Eu from '../assets/Eu.jpeg';
+import { LocalListData } from "../data/fixedFoodData";
 export function BodyContent(){
 
     
@@ -14,48 +15,16 @@ export function BodyContent(){
 
         </span>
 
-        <FoodDialog
-          
-          name="Pastel frito na hora"
-          tastes={[
-            {
-              tasteName:'Taste 1',
-              tastePrice:1.00
-            },
-            {
-              tasteName:'Taste 2',
-              tastePrice:1.00
-            },
-            {
-              tasteName:'Taste 3',
-              tastePrice:1.00
-            },
-            {
-              tasteName:'Taste 4',
-              tastePrice:1.00
-            },
-            {
-              tasteName:'Taste 5',
-              tastePrice:1.00
-            },
-            {
-              tasteName:'Taste 6',
-              tastePrice:1.00
-            },
-            {
-              tasteName:'Taste 7',
-              tastePrice:1.00
-            },
-            {
-              tasteName:'Taste 8',
-              tastePrice:1.00
-            },
-            
-          ]}
-          extras={['+ Cheddar','+ Catupiry']}
-          price={8}
-        />
-        
+        {
+          LocalListData.map((food,i) => (
+            <FoodDialog
+              name={food.name}
+              price={food.price}
+              tastes={food.tastes}
+              key={i}
+            />
+          ))
+        }
     
     
         
