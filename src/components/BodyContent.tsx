@@ -20,11 +20,35 @@ export function BodyContent(){
           tastes={[
             {
               tasteName:'Taste 1',
-              tastePrice:8.50
+              tastePrice:1.00
             },
             {
               tasteName:'Taste 2',
-              tastePrice:9.50
+              tastePrice:1.00
+            },
+            {
+              tasteName:'Taste 3',
+              tastePrice:1.00
+            },
+            {
+              tasteName:'Taste 4',
+              tastePrice:1.00
+            },
+            {
+              tasteName:'Taste 5',
+              tastePrice:1.00
+            },
+            {
+              tasteName:'Taste 6',
+              tastePrice:1.00
+            },
+            {
+              tasteName:'Taste 7',
+              tastePrice:1.00
+            },
+            {
+              tasteName:'Taste 8',
+              tastePrice:1.00
             },
             
           ]}

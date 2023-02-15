@@ -10,9 +10,7 @@ export function FoodDialog({foodImage,name,tastes,price,extras}:foodDialogProps)
     
     const tastesToFood:string[] = tastes.map((taste) => taste.tasteName);
     
-    useEffect(()=>{
-        
-    },[])
+ 
 
     return (
         <Dialog.Root>
