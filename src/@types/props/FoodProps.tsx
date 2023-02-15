@@ -63,4 +63,3 @@ interface CardFoodContainerProps {
     tastes: Array<string>;
     onRemoveClicked(index:number):void;
 }
-
