@@ -21,7 +21,7 @@ export function FoodDialog({foodImage,name,tastes,price}:foodDialogProps) {
                     name={name}
                     tastes={tastesToFood}
                     price={price}
-                   
+                    
 
                 />
             </Dialog.Trigger>

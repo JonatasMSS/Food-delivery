@@ -14,6 +14,7 @@ interface FoodProps {
     name: string;
     tastes: Array<string> ;
     price: number;
+    showPrice?: boolean;
     
 }
 interface foodDialogFormProps {

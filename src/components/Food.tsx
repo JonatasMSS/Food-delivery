@@ -3,12 +3,16 @@ import { Hamburger } from "phosphor-react";
 import * as Dialog from '@radix-ui/react-dialog';
 import { CartDialog } from "./dialogs/CartDialog";
 
+import clsx from 'clsx';
 
 
-
-export function Food({ foodImage, name = "NO DATA IN TITLE AND INGREDIENTS", tastes = [], price = 0.00}: FoodProps) {
+export function Food({ foodImage, name = "NO DATA IN TITLE AND INGREDIENTS", tastes = [], price = 0.00,showPrice = false}: FoodProps) {
     return (
-        <div className="flex items-center justify-between w-full bg-white rounded-lg border-2 border-zinc-400 my-3 p-2">
+        <div className={clsx("flex items-center w-full bg-white rounded-lg border-2 border-zinc-400 my-3 p-2",{
+            'justify-between': showPrice,
+            'justify-start gap-14': !showPrice,
+
+        })} >
 
             {
                 foodImage ?
@@ -29,7 +33,9 @@ export function Food({ foodImage, name = "NO DATA IN TITLE AND INGREDIENTS", tas
                 </span>
             </div>
 
-            <span className='font-roboto-condensed text-lg font-bold text-defaultRed '>RS {price.toFixed(2)}</span>
+            {
+                showPrice && <span className='font-roboto-condensed text-lg font-bold text-defaultRed '>RS {price.toFixed(2)}</span>
+            }
         </div>
     );
 }
