@@ -12,16 +12,7 @@ export function FoodDialogForm({tastes,foodPriceWithoutTastesAndExtras }: foodDi
     }>>([]);
     
     const [foodObservation, setFoodObservation] = useState('');
-    const [extraSelected,setExtraSelected] = useState<string[]>([]);
-    const [priceListToTotal,setPriceListToTotal] = useState<number[]>([]);
-
-
-    useEffect(()=>{
-        setPriceListToTotal([foodPriceWithoutTastesAndExtras]);
-    },[]);
-
-
-    const totalValue = priceListToTotal.reduce((prev,next) => prev+next, 0);
+   
 
     function sendFoodToOrder(event:FormEvent){
         event.preventDefault();
@@ -29,14 +20,10 @@ export function FoodDialogForm({tastes,foodPriceWithoutTastesAndExtras }: foodDi
         console.log({
             'Foods':tasteSelected,
             'Observation': foodObservation,
-            'Extras':extraSelected,
-            'Valor total Pedido':priceListToTotal.reduce((a,b)=> a+b ,0)
         });
 
         setTasteSelected([]);
         setFoodObservation('');
-        setExtraSelected([]);
-        setPriceListToTotal([foodPriceWithoutTastesAndExtras]);
         alert('Comida adicionada ao carrinho!');
     }
 
@@ -44,62 +31,10 @@ export function FoodDialogForm({tastes,foodPriceWithoutTastesAndExtras }: foodDi
 
     return (
         <form onSubmit={sendFoodToOrder}>
-            <FoodTastes freeTastesCheckboxedInList={tasteSelected} pricesListToTotal={priceListToTotal} setTastePriceToPriceList={setPriceListToTotal} setTastesCheckboxedToList={setTasteSelected} tastes={tastes} />
-            <div className='flex flex-col w-full p-2 justify-start'>
-                <label htmlFor="observation" >Observações</label>
-                <textarea
-                    value={foodObservation}
-                    onChange={event => setFoodObservation(event.target.value)}
-                    className='w-full h-32 bg-transparent border-2 border-softGrey rounded-lg placeholder:absolute placeholder:inset-0 placeholder:top-3 placeholder:left-1'
-                    placeholder='Digite aqui alguma observação...'
-                />
-            </div>
-            <div className='flex w-full p-2 justify-between items-center gap-3'>
-                <span className='font-roboto-condensed font-bold text-base'>Valor Total: RS {totalValue.toFixed(2)}</span>
-                <button className='flex p-1  bg-softGreen items-center justify-center rounded-lg font-roboto-condensed'>
-                    <img src={BlackShoppingCart} width={19} />
-                    Adicionar ao carrinho
-                </button>
-            </div>
-        </form>
-    )
-}
+           
+           {/* FOOD TASTES  */}
 
-
-const FoodTastes = ({ tastes,freeTastesCheckboxedInList,pricesListToTotal,setTastesCheckboxedToList,setTastePriceToPriceList}: FoodTastesProps) => {
-    
-    function putFoodSelected(taste:{tasteName:string,tastePrice:number}){
-        const isLessThanTree:boolean = freeTastesCheckboxedInList.length < 3;
-        
-        if(freeTastesCheckboxedInList.includes(taste)){
-            console.log('removendo');
-            //Remover 
-            const newTastesSelectedWithRemovedOne = freeTastesCheckboxedInList.filter(prevTaste => prevTaste !== taste);
-            setTastesCheckboxedToList(newTastesSelectedWithRemovedOne);
-        }else{
-            //Adicionar
-            
-            const newTasteBasedOnLenghtList = isLessThanTree ? {
-                tasteName:taste.tasteName,
-                tastePrice: 0.00
-            }: taste;
-
-            const newFoodList = [...freeTastesCheckboxedInList, newTasteBasedOnLenghtList];
-            setTastesCheckboxedToList(newFoodList);
-
-        }
-
-
-    }
-    function verifyIsIncluded(tasteName:string):boolean{
-
-        //Verify if taste is included
-        const tastesNames = freeTastesCheckboxedInList.map(tastes => tastes.tasteName);
-        return tastesNames.includes(tasteName);
-    }
-
-    return (
-        <div className='flex flex-col w-full p-2 '>
+           <div className='flex flex-col w-full p-2 '>
             <div className='flex items-center border-t-2 border-black pt-2'>
                 <img src={Bag} alt="Bag" width={42} />
                 <span
@@ -113,16 +48,31 @@ const FoodTastes = ({ tastes,freeTastesCheckboxedInList,pricesListToTotal,setTas
 
             <div className='grid grid-flow-row grid-cols-2 mt-2 gap-2 '>
                 {
-                    tastes.map((taste,index) => {
-                        
-                        return <CheckboxFoodItem key={index}   taste={taste} 
-                        onCheckedFunction={putFoodSelected} isChecked={verifyIsIncluded(taste.tasteName)} />
-                    })
+                   
                 }
 
             </div>
 
         </div>
+
+                
+            <div className='flex flex-col w-full p-2 justify-start'>
+                <label htmlFor="observation" >Observações</label>
+                <textarea
+                    value={foodObservation}
+                    onChange={event => setFoodObservation(event.target.value)}
+                    className='w-full h-32 bg-transparent border-2 border-softGrey rounded-lg placeholder:absolute placeholder:inset-0 placeholder:top-3 placeholder:left-1'
+                    placeholder='Digite aqui alguma observação...'
+                />
+            </div>
+            <div className='flex w-full p-2 justify-between items-center gap-3'>
+                <span className='font-roboto-condensed font-bold text-base'>Valor Total: RS 00,00</span>
+                <button className='flex p-1  bg-softGreen items-center justify-center rounded-lg font-roboto-condensed'>
+                    <img src={BlackShoppingCart} width={19} />
+                    Adicionar ao carrinho
+                </button>
+            </div>
+        </form>
     )
 }
 
