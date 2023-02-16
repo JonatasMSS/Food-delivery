@@ -4,7 +4,7 @@ import BlackShoppingCart from '../../assets/shoppingcart-black.svg';
 import Bag from '../../assets/bag.svg';
 import { FormEvent, useEffect, useState } from "react";
 
-export function FoodDialogForm({ tastes,foodPriceWithoutTastesAndExtras }: foodDialogFormProps) {
+export function FoodDialogForm({tastes,foodPriceWithoutTastesAndExtras }: foodDialogFormProps) {
 
     const [freeTasteSelected,setTasteSelected] = useState<string[]>([]);
     const [foodObservation, setFoodObservation] = useState('');
