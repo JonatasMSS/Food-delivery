@@ -33,11 +33,11 @@ interface foodDialogFormProps {
 }
 interface checkBoxFoodItem {
     taste:{
-        name:string,
-        price:number,
+        tasteName:string,
+        tastePrice:number,
     };
-    index:number;
-    onCheckedFunction(taste:string,tastePrice:number,index:number):void; 
+    
+    onCheckedFunction(taste:{tasteName:string, tastePrice:number}):void; 
     isChecked:boolean;
     showPrice?:boolean;
 }
@@ -46,9 +46,15 @@ interface FoodTastesProps {
         tasteName:string,
         tastePrice:number;
     }>;
-    freeTastesCheckboxedInList: Array<string>;
+    freeTastesCheckboxedInList: Array<{
+        tasteName:string;
+        tastePrice:number;
+    }>;
     pricesListToTotal: Array<number>;
-    setTastesCheckboxedToList:React.Dispatch<React.SetStateAction<string[]>>; 
+    setTastesCheckboxedToList:React.Dispatch<React.SetStateAction<{
+        tasteName: string;
+        tastePrice: number;
+    }[]>>;
     setTastePriceToPriceList:React.Dispatch<React.SetStateAction<number[]>>; 
 }
 interface FoodExtrasProps {
