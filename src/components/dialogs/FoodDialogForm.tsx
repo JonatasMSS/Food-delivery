@@ -170,7 +170,7 @@ const CheckboxFoodItem = ({ taste,onCheckedFunction,isChecked,showPrice = false 
                     </Checkbox.Indicator>
                 </div>
             </Checkbox.Root>
-            <span className='font-roboto-condensed text-lg whitespace-nowrap'>{taste.name}</span>
+            <span className='font-roboto-condensed text-lg '>{taste.name}</span>
             {
                 showPrice && <span className="font-roboto-condensed text-sm whitespace-nowrap">R$ {taste.price.toFixed(2)}</span>
             }
