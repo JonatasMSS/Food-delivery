@@ -90,11 +90,11 @@ const FoodExtras = ({extras,extrasInCheckbox,putExtraToCheckboxArray}:FoodExtras
 
             <div className='grid grid-flow-row grid-cols-2 mt-2 gap-2 '>
                 {
-                    extras!.map((extra,index) => {
-                        const {extraName,extraPrice} = extra;
+                    // extras!.map((extra,index) => {
+                    //     const {extraName,extraPrice} = extra;
 
-                        return <CheckboxFoodItem key={index} taste={{name:extraName,price:extraPrice}} onCheckedFunction={putFoodSelected} isChecked={extrasInCheckbox.includes(extraName)}/>
-                    })
+                    //     return <CheckboxFoodItem key={index} taste={{name:extraName,price:extraPrice}} onCheckedFunction={putFoodSelected} isChecked={extrasInCheckbox.includes(extraName)}/>
+                    // })
                 }
 
             </div>
@@ -105,13 +105,13 @@ const FoodExtras = ({extras,extrasInCheckbox,putExtraToCheckboxArray}:FoodExtras
 
 const FoodTastes = ({ tastes,freeTastesCheckboxedInList,pricesListToTotal,setTastesCheckboxedToList,setTastePriceToPriceList}: FoodTastesProps) => {
     
-    function putFoodSelected(taste:string,tastePrice:number){
+    function putFoodSelected(taste:string,tastePrice:number,tasteIndex:number){
         const isLessThanTree:boolean = freeTastesCheckboxedInList.length < 3;
         
    
         if(freeTastesCheckboxedInList.includes(taste)){
             const newFoodSelectedWithRemovedOne = freeTastesCheckboxedInList.filter(food => food !== taste);
-            const newPriceListWithRemovedOne = isLessThanTree ? [...pricesListToTotal] : pricesListToTotal.filter(price => price !== tastePrice);
+            const newPriceListWithRemovedOne = isLessThanTree ? [...pricesListToTotal] : pricesListToTotal.filter((price,index) => index !== tasteIndex);
             setTastesCheckboxedToList(newFoodSelectedWithRemovedOne);
             setTastePriceToPriceList(newPriceListWithRemovedOne);
         }
@@ -146,7 +146,10 @@ const FoodTastes = ({ tastes,freeTastesCheckboxedInList,pricesListToTotal,setTas
                     tastes.map((taste,index) => {
                         const {tasteName,tastePrice} = taste;
 
-                        return <CheckboxFoodItem key={index}  taste={{name:tasteName,price:tastePrice}} onCheckedFunction={putFoodSelected} isChecked={freeTastesCheckboxedInList.includes(tasteName)}/>
+                        return <CheckboxFoodItem key={index} index={index}  taste={{name:tasteName,price:tastePrice}} 
+                        onCheckedFunction={putFoodSelected} isChecked={freeTastesCheckboxedInList.includes(tasteName)
+                            
+                        } />
                     })
                 }
 
@@ -156,11 +159,11 @@ const FoodTastes = ({ tastes,freeTastesCheckboxedInList,pricesListToTotal,setTas
     )
 }
 
-const CheckboxFoodItem = ({ taste,onCheckedFunction,isChecked,showPrice = false }: checkBoxFoodItem) => {
+const CheckboxFoodItem = ({ taste,onCheckedFunction,isChecked,showPrice = false,index}: checkBoxFoodItem) => {
     return (
         <div className='flex justify-start items-center gap-2'>
             <Checkbox.Root
-                onCheckedChange={() => onCheckedFunction(taste.name,taste.price)}
+                onCheckedChange={() => onCheckedFunction(taste.name,taste.price,index)}
                 checked={isChecked}
             >
                 <div className='w-8 h-8 border-zinc-400 border-2 rounded-lg flex items-center justify-center'>

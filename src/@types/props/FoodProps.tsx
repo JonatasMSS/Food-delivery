@@ -36,7 +36,8 @@ interface checkBoxFoodItem {
         name:string,
         price:number,
     };
-    onCheckedFunction(taste:string,tastePrice:number):void; 
+    index:number;
+    onCheckedFunction(taste:string,tastePrice:number,index:number):void; 
     isChecked:boolean;
     showPrice?:boolean;
 }
