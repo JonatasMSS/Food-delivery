@@ -7,9 +7,11 @@ import { FormEvent, useEffect, useState } from "react";
 export function FoodDialogForm({tastes,foodPriceWithoutTastesAndExtras }: foodDialogFormProps) {
 
     const [freeTasteSelected,setTasteSelected] = useState<string[]>([]);
+    const [paidTasteSelected,setPaidTasteSelected] = useState<string[]>([]);
     const [foodObservation, setFoodObservation] = useState('');
     const [extraSelected,setExtraSelected] = useState<string[]>([]);
     const [priceListToTotal,setPriceListToTotal] = useState<number[]>([]);
+
 
     useEffect(()=>{
         setPriceListToTotal([foodPriceWithoutTastesAndExtras]);
