@@ -20,6 +20,7 @@ export function BodyContent(){
             <FoodDialog
               name={food.name}
               price={food.price}
+              description="Comida boa na hora pae"
               tastes={food.tastes}
               key={i}
             />

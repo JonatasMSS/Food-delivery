@@ -6,9 +6,9 @@ import { Food } from '../Food';
 import { FoodDialogForm } from './FoodDialogForm';
 import { useEffect } from 'react';
 
-export function FoodDialog({foodImage,name,tastes,price}:foodDialogProps) {
+export function FoodDialog({foodImage,name,tastes,price,description}:foodDialogProps) {
     
-    const tastesToFood:string[] = tastes.map((taste) => taste.tasteName);
+    
     
  
 
@@ -19,7 +19,7 @@ export function FoodDialog({foodImage,name,tastes,price}:foodDialogProps) {
 
                     foodImage={foodImage}
                     name={name}
-                    tastes={tastesToFood}
+                    description={description}
                     price={price}
                    
 
@@ -44,13 +44,12 @@ export function FoodDialog({foodImage,name,tastes,price}:foodDialogProps) {
                             <Hamburger size={90} weight='bold' className='mt-4'/>
                         }
                         <div className='flex w-full p-2 justify-around'>
-                            <div className='flex flex-col'>
+                            <div className='flex flex-col w-1/2 text-start '>
                                 <span className='font-roboto-condensed font-bold text-2xl'>{name}</span>
-                                <span className='font-roboto-condensed '>{
-                                    tastes.map(ingredient => (
-                                        `| ${ingredient.tasteName} `
-                                    ))
-                                }</span>
+                                <span className='font-roboto-condensed'>{
+                                    description
+                                }
+                                </span>
                             </div>
                             <div className='flex justify-center items-center w-32'>
                                 <span className='font-roboto-condensed font-bold text-defaultOrange text-xl'>R$ {price.toFixed(2)}</span>

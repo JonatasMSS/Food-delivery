@@ -2,22 +2,24 @@
 interface foodDialogProps{
     foodImage?: string;
     name:string;
+    description?: string;
     tastes:Array<{
         tasteName: string,
         tastePrice:number
     }>;
     price:number;
-
+    
 }
-interface FoodProps {
+interface FoodContainerProps {
     foodImage?: string;
+    description?: string;
     name: string;
-    tastes: Array<string> ;
     price: number;
     
 }
 interface foodDialogFormProps {
-    foodPriceWithoutTastesAndExtras:number
+    foodPriceWithoutTastesAndExtras:number;
+    
     tastes: Array<{
         tasteName:string,
         tastePrice:number

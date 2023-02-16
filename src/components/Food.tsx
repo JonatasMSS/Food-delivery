@@ -6,7 +6,7 @@ import { CartDialog } from "./dialogs/CartDialog";
 
 
 
-export function Food({ foodImage, name = "NO DATA IN TITLE AND INGREDIENTS", tastes = [], price = 0.00}: FoodProps) {
+export function Food({ foodImage,name = "NO DATA IN TITLE AND INGREDIENTS", price = 0.00,description}: FoodContainerProps) {
     return (
         <div className="flex items-center justify-between w-full bg-white rounded-lg border-2 border-zinc-400 my-3 p-2">
 
@@ -21,11 +21,7 @@ export function Food({ foodImage, name = "NO DATA IN TITLE AND INGREDIENTS", tas
             <div className='flex w-32 flex-col items-center'>
                 <span className='font-roboto-condensed font-bold'>{name}</span>
                 <span className='font-roboto-condensed w-48 truncate  text-sm'>
-                    {
-                       tastes.map(taste => (
-                        `| ${taste} `
-                       ))
-                    }
+                    {description}
                 </span>
             </div>
 
