@@ -6,7 +6,7 @@ import { Food } from '../Food';
 import { FoodDialogForm } from './FoodDialogForm';
 import { useEffect } from 'react';
 
-export function FoodDialog({foodImage,name,tastes,price}:foodDialogProps) {
+export function FoodDialog({foodImage,name,tastes,price,showPrice = false}:foodDialogProps) {
     
     const tastesToFood:string[] = tastes.map((taste) => taste.tasteName);
     
@@ -21,7 +21,7 @@ export function FoodDialog({foodImage,name,tastes,price}:foodDialogProps) {
                     name={name}
                     tastes={tastesToFood}
                     price={price}
-                    
+                    showPrice={showPrice}
 
                 />
             </Dialog.Trigger>

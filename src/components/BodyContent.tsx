@@ -22,6 +22,7 @@ export function BodyContent(){
               price={food.price}
               tastes={food.tastes}
               key={i}
+              
             />
           ))
         }

@@ -7,6 +7,7 @@ interface foodDialogProps{
         tastePrice:number
     }>;
     price:number;
+    showPrice?:boolean;
 
 }
 interface FoodProps {
