@@ -33,8 +33,9 @@ interface foodDialogFormProps {
 }
 interface checkBoxFoodItem {
     taste:{
-        tasteName:string,
-        tastePrice:number,
+        tasteName:string;
+        tastePrice:number;
+        isFree:boolean;
     };
     
     onCheckedFunction(taste:{tasteName:string, tastePrice:number}):void; 

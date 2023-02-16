@@ -6,13 +6,23 @@ import { FormEvent, useEffect, useState } from "react";
 
 export function FoodDialogForm({tastes,foodPriceWithoutTastesAndExtras }: foodDialogFormProps) {
 
+
+    const tastesToForm = tastes.map(taste => {
+       return {
+        tasteName: taste.tasteName,
+        tastePrice: taste.tastePrice,
+        isFree: false,
+       }
+    })
+
     const [tasteSelected,setTasteSelected] = useState<Array<{
         tasteName:string;
         tastePrice:number;
+        isFree:boolean
     }>>([]);
     
     const [foodObservation, setFoodObservation] = useState('');
-   
+    const [totalValue, setTotalValue] = useState(foodPriceWithoutTastesAndExtras);
 
     function sendFoodToOrder(event:FormEvent){
         event.preventDefault();
@@ -20,12 +30,58 @@ export function FoodDialogForm({tastes,foodPriceWithoutTastesAndExtras }: foodDi
         console.log({
             'Foods':tasteSelected,
             'Observation': foodObservation,
+            'Total Value': totalValue
         });
 
         setTasteSelected([]);
         setFoodObservation('');
+        setTotalValue(foodPriceWithoutTastesAndExtras);
         alert('Comida adicionada ao carrinho!');
     }
+
+
+
+
+    function verifyIsInTasteList(tasteName:string){
+        const mappedList = tasteSelected.map(e => e.tasteName);
+        return mappedList.includes(tasteName);
+    }
+
+    function putToTasteSelected(taste:{tasteName:string, tastePrice: number, isFree:boolean}){
+        const isLessThanThree = tasteSelected.length < 3;
+        if(verifyIsInTasteList(taste.tasteName)){
+            // Remover
+            console.log('Removendo...');
+            
+
+            const tastePriceBasedoOnIsFree = tasteSelected.length <= 3 ? 0 : taste.tastePrice;
+            const newListWithRemovedOne = tasteSelected.filter(prevValue => prevValue.tasteName !== taste.tasteName);
+            const newTotalValue = totalValue - tastePriceBasedoOnIsFree;
+
+            setTasteSelected(newListWithRemovedOne);
+            setTotalValue(newTotalValue);
+
+        }else{
+            console.log('Adicionado');
+            const newTasteBasedOnLenght = {
+                tasteName: taste.tasteName,
+                tastePrice: taste.tastePrice,
+                isFree: isLessThanThree
+            }
+            const newTasteListToTasteSelect = [...tasteSelected,newTasteBasedOnLenght];
+            setTasteSelected(newTasteListToTasteSelect);
+            const newTotalValue = totalValue + (newTasteBasedOnLenght.isFree ? 0 : newTasteBasedOnLenght.tastePrice) ;
+            setTotalValue(newTotalValue);
+            
+            
+             
+        
+        }
+
+    }
+    
+
+
 
     
 
@@ -48,14 +104,21 @@ export function FoodDialogForm({tastes,foodPriceWithoutTastesAndExtras }: foodDi
 
             <div className='grid grid-flow-row grid-cols-2 mt-2 gap-2 '>
                 {
-                   
+                   tastesToForm.map((tasteL,index) => (
+                    <CheckboxFoodItem 
+                        taste={tasteL}
+                        isChecked={verifyIsInTasteList(tasteL.tasteName)}
+                        key={index}
+                        onCheckedFunction={putToTasteSelected}
+                     />
+                   ))
                 }
 
             </div>
 
         </div>
 
-                
+
             <div className='flex flex-col w-full p-2 justify-start'>
                 <label htmlFor="observation" >Observações</label>
                 <textarea
@@ -66,7 +129,7 @@ export function FoodDialogForm({tastes,foodPriceWithoutTastesAndExtras }: foodDi
                 />
             </div>
             <div className='flex w-full p-2 justify-between items-center gap-3'>
-                <span className='font-roboto-condensed font-bold text-base'>Valor Total: RS 00,00</span>
+                <span className='font-roboto-condensed font-bold text-base'>Valor Total: RS {totalValue.toFixed(2)}</span>
                 <button className='flex p-1  bg-softGreen items-center justify-center rounded-lg font-roboto-condensed'>
                     <img src={BlackShoppingCart} width={19} />
                     Adicionar ao carrinho
