@@ -20,7 +20,7 @@ export function CheckboxFoodItem({ taste,onCheckedFunction,isChecked,showPrice =
             </Checkbox.Root>
             <span className='font-roboto-condensed text-lg '>{taste.tasteName}</span>
             {
-                showPrice && <span className="font-roboto-condensed text-sm whitespace-nowrap">R$ {taste.tastePrice.toFixed(2)}</span>
+                showPrice && <span className="font-roboto-condensed text-sm font-bold whitespace-nowrap">R$ {taste.tastePrice.toFixed(2)}</span>
             }
         </div>
     )

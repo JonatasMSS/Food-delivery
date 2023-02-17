@@ -10,7 +10,10 @@ export function TapiocaFoodDialogForm({tastes,foodPriceWithoutTastesAndExtras}:f
 
 
 
-    const [tasteSelected,setTasteSelected] = useState([]);
+    const [tasteSelected,setTasteSelected] = useState<Array<{
+        tasteName:string,
+        tastePrice:number
+    }>>([]);
 
     const [foodObservation, setFoodObservation] = useState('');
     const [totalValue, setTotalValue] = useState(foodPriceWithoutTastesAndExtras);
@@ -30,6 +33,30 @@ export function TapiocaFoodDialogForm({tastes,foodPriceWithoutTastesAndExtras}:f
         alert('Comida adicionada ao carrinho!');
     }
 
+
+    function verifyIsInTasteSelected(tasteName:string){
+      
+        const tasteNames = tasteSelected.map(e => e.tasteName);
+        return tasteNames.includes(tasteName)
+    }
+
+    function putToSelectedList(taste:{tasteName:string, tastePrice: number}){
+        
+        if(verifyIsInTasteSelected(taste.tasteName)){
+            const newTasteSelectedListWithRemovedOne = tasteSelected.filter(prevTaste => prevTaste !== taste);
+            const newTotalValue = totalValue > 0 ? (totalValue - taste.tastePrice) : 0
+            setTotalValue(newTotalValue);
+            setTasteSelected(newTasteSelectedListWithRemovedOne);
+
+        }else{
+            const newTasteSelectedList = [...tasteSelected,taste];
+            setTasteSelected(newTasteSelectedList);
+            const newTotalValue = totalValue + taste.tastePrice;
+            setTotalValue(newTotalValue);
+        }
+
+    }
+
     return(
         <form onSubmit={sendFoodToOrder}>
            
@@ -47,14 +74,14 @@ export function TapiocaFoodDialogForm({tastes,foodPriceWithoutTastesAndExtras}:f
          </div>
          <span className='font-roboto-condensed font-thin ml-2 mt-2'>Escolha 3 sabores includo no pacote.<span className="font-roboto-condensed font-bold">+ R$ 1,00 por escolha adicional</span></span>
 
-         <div className='grid grid-flow-row grid-cols-2 mt-2 gap-2 '>
+         <div className='grid grid-flow-row grid-cols-1 mt-2 gap-5 '>
              {
-                tastes.map((taste,index) => (
+                tastes.map((tastel,index) => (
                     <CheckboxFoodItem
-                        taste={taste}
+                        taste={tastel}
                         key={index}
-                        isChecked={false}
-                        onCheckedFunction={() => {}}
+                        isChecked={verifyIsInTasteSelected(tastel.tasteName)}
+                        onCheckedFunction={putToSelectedList}
                         showPrice
                     />
                 ))

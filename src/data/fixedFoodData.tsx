@@ -5,6 +5,7 @@
 export const LocalListData:Array<foodDialogProps> = [
     {
         name:'Pastel frito na hora',
+        type:'pastel',
         price:7.00,
         tastes:[
             {
@@ -40,6 +41,7 @@ export const LocalListData:Array<foodDialogProps> = [
     {
         name:'Tapioca doce',
         price: 0.00,
+        type:'tapioca',
         tastes:[
             {
                 tasteName:'Banana, côco e canela',

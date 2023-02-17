@@ -23,7 +23,7 @@ export function BodyContent(){
               description="Comida boa na hora pae"
               tastes={food.tastes}
               key={i}
-              type={'pastel'}
+              type={food.type}
               
             />
           ))
