@@ -7,7 +7,7 @@ import { useState } from 'react';
 export function CartFoodContainer({ foodImage, name, price, tastes, onRemoveClicked}: CardFoodContainerProps) {
 
     const [open, setOpen] = useState<boolean>(false);
-
+    
     return (
         <Collapsible.Root open={open} onOpenChange={setOpen} className='flex flex-col' >
             <div className=" z-10 flex w-full justify-between items-center gap-2 p-2 bg-white border-2 border-extraSoftGrey rounded-lg">
