@@ -5,6 +5,7 @@ import { Hamburger } from "phosphor-react";
 import { Food } from '../Food';
 import { PastelFoodDialogForm } from './PastelFoodDialogForm';
 import { TapiocaFoodDialogForm } from './TapiocaFoodDialogForm';
+import { HamburguerFoodDialogForm } from './HamburguerFoodDialogForm';
 
 
 
@@ -22,6 +23,14 @@ export function FoodDialog({foodImage,name,tastes,price,description,showPrice = 
         else if(type === 'TAPIOCA'){
             return (
                 <TapiocaFoodDialogForm
+                    tastes={tastes}
+                    foodPriceWithoutTastesAndExtras={price}
+                />
+            )
+        }
+        else if(type === 'HAMBURGUER'){
+            return(
+                <HamburguerFoodDialogForm 
                     tastes={tastes}
                     foodPriceWithoutTastesAndExtras={price}
                 />
@@ -61,7 +70,7 @@ export function FoodDialog({foodImage,name,tastes,price,description,showPrice = 
                             <Hamburger size={90} weight='bold' className='mt-4'/>
                         }
                         <div className='flex w-full p-2 justify-around'>
-                            <div className='flex flex-col w-1/2 text-start '>
+                            <div className='flex flex-col w-full text-start '>
                                 <span className='font-roboto-condensed font-bold text-2xl'>{name}</span>
                                 <span className='font-roboto-condensed'>{
                                     description
@@ -70,7 +79,7 @@ export function FoodDialog({foodImage,name,tastes,price,description,showPrice = 
                             </div>
                             <div className='flex justify-center items-center w-32'>
                                {
-                                type === 'pastel' ?  <span className='font-roboto-condensed font-bold text-defaultOrange text-xl'>R$ {price.toFixed(2)}</span>:
+                                type === 'pastel' || type === 'hamburguer' ?  <span className='font-roboto-condensed font-bold text-defaultOrange text-xl'>R$ {price.toFixed(2)}</span>:
                                 <span className='font-roboto-condensed text-defaultOrange font-bold text-xl'> Escolha o sabor</span>
                                }
                             </div>

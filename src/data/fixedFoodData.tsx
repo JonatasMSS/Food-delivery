@@ -101,5 +101,38 @@ export const LocalListData:Array<foodDialogProps> = [
             
         ],
         type:'tapioca'
+    },
+    {
+        name:'Hamburguer',
+        price:7.00,
+        description:'Pão,carne,salada e molho especial',
+        tastes:[
+            {
+                tasteName:'X-Misto ( Hamburguer + queijo e presunto)',
+                tastePrice:8.00
+            },
+            {
+                tasteName:'X-Bacon ( Hamburguer + queijo e bacon)',
+                tastePrice:9.00
+            },
+            {
+                tasteName:'X-Egg ( Hamburguer + queijo e ovo)',
+                tastePrice:8.00
+            },
+            {
+                tasteName:'X-Egg Bacon ( Hamburguer + queijo,ovo e bacon)',
+                tastePrice:10.00
+            },
+            {
+                tasteName:'X-Tudo (Todos os sabores)',
+                tastePrice:13.00
+            },
+            {
+                tasteName:'X-Calabresa ( Hamburguer + queijo e calabresa)',
+                tastePrice:9.00
+            }
+        ],
+        type:'hamburguer',
+
     }
 ];
