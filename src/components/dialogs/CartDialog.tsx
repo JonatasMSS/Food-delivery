@@ -8,12 +8,7 @@ import { useEffect, useState } from "react";
 
 
 interface CartFoodProp{
-    foodsToOrder?:Array<{
-        foodImage?: string;
-        name: string;
-        price: number;
-        tastes: Array<string>;
-    }>;
+    foodsToOrder?:Array<FoodToOrder>;
 }
 
 
@@ -39,12 +34,21 @@ export function CartDialog({foodsToOrder}:CartFoodProp) {
                     <div className="w-full  pt-5 pb-20 px-2 flex flex-col max-h-vh-90 overflow-auto">
                         {
                             
-                            <span className="font-roboto-condensed font-bold text-center">Nenhum pedido no carrinho</span>
+                            foodsToOrder ? 
+                            foodsToOrder.map(foods => (
+                                <CartFoodContainer
+                                    name={foods.name}
+                                    price={foods.totalPrice}
+                                    onRemoveClicked={() => []}
+                                    tastes={foods.tastes}
+                                />
+                            ))
+                            :<span className="font-roboto-condensed font-bold text-center">Nenhum pedido no carrinho</span>
                         }
 
                     </div>
                     <div className="absolute inset-0 top-[90%] z-10 rounded-b-lg bg-white h-fit flex w-full justify-between items-center p-2">
-                        <span className="font-roboto-condensed font-bold text-xl">Valor total: RS00,00</span>
+                        <span className="font-roboto-condensed font-bold text-xl">Valor total: RS 00,00</span>
                         <button className="flex bg-softGreen p-2 rounded-lg items-center gap-2">
                             <span className="font-roboto-condensed ">Confirmar pedido</span>
                             <img src={BlackCarrinho} alt="Carrinho" className="w-[20px]"/>

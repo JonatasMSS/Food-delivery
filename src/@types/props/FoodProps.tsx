@@ -45,6 +45,7 @@ interface checkBoxFoodItem {
 interface CardFoodContainerProps {
     foodImage?: string;
     name: string;
+    description?:string;
     price: number;
     tastes: Array<string>;
     onRemoveClicked(index:number):void;

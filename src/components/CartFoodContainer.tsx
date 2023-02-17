@@ -32,7 +32,7 @@ export function CartFoodContainer({ foodImage, name, price, tastes, onRemoveClic
                 </Collapsible.Trigger>
             </div>
             <Collapsible.Content className='flex flex-col bg-zinc-400/50 rounded-b-lg z-0 relative inset-0 -top-3 p-2 '>
-                <span className='font-roboto-condensed font-bold border-b-2 border-zinc-700'>Sabores selecionados</span>
+                <span className='font-roboto-condensed font-bold border-b-2 border-zinc-700'>Sabores | Acompanhamentos selecionados</span>
                 <div className=' grid grid-cols-3 grid-flow-row'>
                     {
                         tastes.map((taste,index) => (
