@@ -2,8 +2,15 @@ import Whatsapp from '../assets/whatsapp.svg';
 import Instagram from '../assets/instagram.svg';
 import Logo from '../assets/Logo.svg';
 import { CartDialog } from './dialogs/CartDialog';
+import { FoodToOrder } from '../models/foodModel';
+import { LocalStorageController } from '../data/localDataStorageController';
 
 export function Header() {
+
+  const FoodsCartInStorage = new LocalStorageController();
+
+  const FoodToOrder:FoodToOrder[] = FoodsCartInStorage.getDataFromStorage('foods') ?? [];
+  
   
 
   return (
@@ -16,9 +23,7 @@ export function Header() {
         <img src={Logo} alt="Logo do app" className='w-12' />
       </div>
       <div className='p-2 my-2 rounded-lg  items-center bg-softWhite'>
-        <CartDialog
-          
-        />
+        <CartDialog/>
       </div>
     </div>
   )

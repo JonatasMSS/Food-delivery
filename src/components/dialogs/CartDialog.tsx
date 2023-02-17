@@ -5,15 +5,28 @@ import BlackCarrinho from '../../assets/shoppingcart-black.svg';
 import { ArrowLeft, } from 'phosphor-react';
 import { CartFoodContainer } from "../CartFoodContainer";
 import { useEffect, useState } from "react";
+import { FoodToOrder } from "../../models/foodModel";
+import { LocalStorageController } from "../../data/localDataStorageController";
 
 
-interface CartFoodProp{
-    foodsToOrder?:Array<FoodToOrder>;
-}
 
 
-export function CartDialog({foodsToOrder}:CartFoodProp) {
+export function CartDialog() {
     
+
+    const FoodsCartInStorage = new LocalStorageController();
+    const FoodInStorage = FoodsCartInStorage.getDataFromStorage('foods');
+
+    
+
+    const [foodsInCart,setFoodsInCart] = useState(FoodInStorage);
+    
+    useEffect(()=>{
+        setFoodsInCart(FoodInStorage);
+    },[])
+
+
+
     return (
         <Dialog.Root>
             <Dialog.Trigger className="flex">
@@ -34,16 +47,18 @@ export function CartDialog({foodsToOrder}:CartFoodProp) {
                     <div className="w-full  pt-5 pb-20 px-2 flex flex-col max-h-vh-90 overflow-auto">
                         {
                             
-                            foodsToOrder ? 
-                            foodsToOrder.map(foods => (
+                            foodsInCart ? 
+                            foodsInCart.map((food,index) => (
                                 <CartFoodContainer
-                                    name={foods.name}
-                                    price={foods.totalPrice}
-                                    onRemoveClicked={() => []}
-                                    tastes={foods.tastes}
+                                key={index}
+                                    name={food.name}
+                                    price={food.totalPrice}
+                                    tastes={food.tastes}
+                                    onRemoveClicked={()=> {}}
+
                                 />
-                            ))
-                            :<span className="font-roboto-condensed font-bold text-center">Nenhum pedido no carrinho</span>
+                            )):
+                            <span className="font-roboto-condensed font-bold text-center">Nenhum pedido no carrinho</span>
                         }
 
                     </div>
