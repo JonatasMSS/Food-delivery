@@ -35,7 +35,7 @@ interface checkBoxFoodItem {
     taste:{
         tasteName:string;
         tastePrice:number;
-        isFree:boolean;
+        isFree?:boolean;
     };
     
     onCheckedFunction(taste:{tasteName:string, tastePrice:number}):void; 

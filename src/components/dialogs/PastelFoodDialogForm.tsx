@@ -1,12 +1,9 @@
-import { Check } from "phosphor-react"
-import * as Checkbox from '@radix-ui/react-checkbox';
 import BlackShoppingCart from '../../assets/shoppingcart-black.svg';
 import Bag from '../../assets/bag.svg';
 import { FormEvent, useEffect, useState } from "react";
+import { CheckboxFoodItem } from "../CheckboxFoodItem";
 
 export function PastelFoodDialogForm({tastes,foodPriceWithoutTastesAndExtras }: foodDialogFormProps) {
-
-
     const tastesToForm = tastes.map(taste => {
        return {
         tasteName: taste.tasteName,
@@ -139,24 +136,3 @@ export function PastelFoodDialogForm({tastes,foodPriceWithoutTastesAndExtras }: 
     )
 }
 
-const CheckboxFoodItem = ({ taste,onCheckedFunction,isChecked,showPrice = false}: checkBoxFoodItem) => {
-    return (
-        <div className='flex justify-start items-center gap-2'>
-            <Checkbox.Root
-                onCheckedChange={() => onCheckedFunction(taste)}
-                checked={isChecked}
-            >
-                <div className='w-8 h-8 border-zinc-400 border-2 rounded-lg flex items-center justify-center'>
-                    <Checkbox.Indicator>
-                        <Check size={24} weight='bold' />
-                        
-                    </Checkbox.Indicator>
-                </div>
-            </Checkbox.Root>
-            <span className='font-roboto-condensed text-lg '>{taste.tasteName}</span>
-            {
-                showPrice && <span className="font-roboto-condensed text-sm whitespace-nowrap">R$ {taste.tastePrice.toFixed(2)}</span>
-            }
-        </div>
-    )
-}
