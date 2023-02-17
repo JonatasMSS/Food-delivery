@@ -19,7 +19,7 @@ export function Food({ foodImage,showPrice = false,name = "NO DATA IN TITLE AND 
                 foodImage ?
                     <img src={foodImage} alt="Imagem da comida" className="w-16 h-16 rounded-lg"/> :
                     <div className='w-16 h-16 rounded-lg'>
-                        <Hamburger weight='fill' size={'width:100%'} />
+                        <Hamburger weight='fill' size={62} />
                     </div>
             }
 

@@ -1,7 +1,7 @@
 
 
 
-class LocalStorageController{
+export class LocalStorageController{
     store: Storage;
     constructor(){
         this.store = localStorage;

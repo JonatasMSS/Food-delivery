@@ -1,10 +1,12 @@
 import { Food } from "./Food";
 import { FoodDialog } from "./dialogs/FoodDialog";
 import { LocalListData } from "../data/fixedFoodData";
+import { LocalStorageController } from "../data/localDataStorageController";
 
 export function BodyContent(){
 
-    
+    const localData = new LocalStorageController();
+  
 
     return(
         <div className='bg-softWhite my-6 flex flex-col rounded-lg p-2 w-11/12'>
