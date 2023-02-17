@@ -12,6 +12,8 @@ export function PastelFoodDialogForm({tastes,foodPriceWithoutTastesAndExtras }: 
        }
     })
 
+
+    
     const [tasteSelected,setTasteSelected] = useState<Array<{
         tasteName:string;
         tastePrice:number;

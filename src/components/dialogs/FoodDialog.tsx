@@ -4,6 +4,7 @@ import { ArrowLeft, Check } from 'phosphor-react';
 import { Hamburger } from "phosphor-react";
 import { Food } from '../Food';
 import { PastelFoodDialogForm } from './PastelFoodDialogForm';
+import { TapiocaFoodDialogForm } from './TapiocaFoodDialogForm';
 
 
 
@@ -19,7 +20,12 @@ export function FoodDialog({foodImage,name,tastes,price,description,showPrice = 
             )
         }
         else if(type === 'TAPIOCA'){
-            
+            return (
+                <TapiocaFoodDialogForm
+                    tastes={tastes}
+                    foodPriceWithoutTastesAndExtras={price}
+                />
+            )
         }
     }
 
