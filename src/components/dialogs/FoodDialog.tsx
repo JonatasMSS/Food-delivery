@@ -69,7 +69,10 @@ export function FoodDialog({foodImage,name,tastes,price,description,showPrice = 
                                 </span>
                             </div>
                             <div className='flex justify-center items-center w-32'>
-                                <span className='font-roboto-condensed font-bold text-defaultOrange text-xl'>R$ {price.toFixed(2)}</span>
+                               {
+                                type === 'pastel' ?  <span className='font-roboto-condensed font-bold text-defaultOrange text-xl'>R$ {price.toFixed(2)}</span>:
+                                <span className='font-roboto-condensed text-defaultOrange font-bold text-xl'> Escolha o sabor</span>
+                               }
                             </div>
                         </div>
                         {

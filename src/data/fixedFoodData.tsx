@@ -65,5 +65,41 @@ export const LocalListData:Array<foodDialogProps> = [
             }
             
         ]
+    },
+    {
+        name:'Tapioca salgada',
+        price:0.00,
+        tastes:[
+            {
+                tasteName:'Côco',
+                tastePrice:3.00
+            },
+            {
+                tasteName:'Manteiga',
+                tastePrice:3.00
+            },
+            {
+                tasteName:'Queijo coalho',
+                tastePrice:5.00
+            },
+            {
+                tasteName:'Frango',
+                tastePrice:5.00
+            },
+            {
+                tasteName:'Presunto e queijo coalho',
+                tastePrice:5.00
+            },
+            {
+                tasteName:'Frango e queijo coalho',
+                tastePrice:6.00
+            },
+            {
+                tasteName:'Frango e cheedar',
+                tastePrice:6.00
+            },
+            
+        ],
+        type:'tapioca'
     }
 ];

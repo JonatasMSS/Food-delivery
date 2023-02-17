@@ -72,9 +72,9 @@ export function TapiocaFoodDialogForm({tastes,foodPriceWithoutTastesAndExtras}:f
 
              </span>
          </div>
-         <span className='font-roboto-condensed font-thin ml-2 mt-2'>Escolha 3 sabores includo no pacote.<span className="font-roboto-condensed font-bold">+ R$ 1,00 por escolha adicional</span></span>
+        
 
-         <div className='grid grid-flow-row grid-cols-1 mt-2 gap-5 '>
+         <div className='grid grid-flow-row grid-cols-1 mt-2 ml-1 gap-5 '>
              {
                 tastes.map((tastel,index) => (
                     <CheckboxFoodItem
@@ -93,11 +93,11 @@ export function TapiocaFoodDialogForm({tastes,foodPriceWithoutTastesAndExtras}:f
 
 
          <div className='flex flex-col w-full p-2 justify-start'>
-             <label htmlFor="observation" >Observações</label>
+             <label htmlFor="observation" className='font-roboto-condensed font-semibold'>Observações</label>
              <textarea
                  value={foodObservation}
                  onChange={event => setFoodObservation(event.target.value)}
-                 className='w-full h-32 bg-transparent border-2 border-softGrey rounded-lg placeholder:absolute placeholder:inset-0 placeholder:top-3 placeholder:left-1'
+                 className='w-full h-32 p-2 bg-transparent border-2 border-softGrey rounded-lg placeholder:absolute placeholder:inset-0 placeholder:top-3 placeholder:left-1'
                  placeholder='Digite aqui alguma observação...'
              />
          </div>
