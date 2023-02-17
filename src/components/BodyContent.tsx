@@ -1,5 +1,5 @@
 import { Food } from "./Food";
-import { FoodDialog } from "./dialogs/FoodDialog";
+import { PastelFoodDialog } from "./dialogs/FoodDialog";
 import Eu from '../assets/Eu.jpeg';
 import { LocalListData } from "../data/fixedFoodData";
 export function BodyContent(){
@@ -17,7 +17,7 @@ export function BodyContent(){
 
         {
           LocalListData.map((food,i) => (
-            <FoodDialog
+            <PastelFoodDialog
               name={food.name}
               price={food.price}
               description="Comida boa na hora pae"
