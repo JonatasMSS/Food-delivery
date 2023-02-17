@@ -1,4 +1,6 @@
 
+
+
 interface foodDialogProps{
     foodImage?: string;
     name:string;
@@ -8,7 +10,8 @@ interface foodDialogProps{
         tastePrice:number
     }>;
     price:number;
-        showPrice?:boolean;
+    showPrice?:boolean;
+    type: string;
 
 }
 interface FoodContainerProps {
@@ -26,10 +29,7 @@ interface foodDialogFormProps {
         tasteName:string,
         tastePrice:number
     }>;
-    extras?: Array<{
-        extraName:string,
-        extraPrice:number
-    }>;
+    
 }
 interface checkBoxFoodItem {
     taste:{

@@ -1,7 +1,7 @@
 import { Food } from "./Food";
-import { PastelFoodDialog } from "./dialogs/FoodDialog";
-import Eu from '../assets/Eu.jpeg';
+import { FoodDialog } from "./dialogs/FoodDialog";
 import { LocalListData } from "../data/fixedFoodData";
+
 export function BodyContent(){
 
     
@@ -17,12 +17,13 @@ export function BodyContent(){
 
         {
           LocalListData.map((food,i) => (
-            <PastelFoodDialog
+            <FoodDialog
               name={food.name}
               price={food.price}
               description="Comida boa na hora pae"
               tastes={food.tastes}
               key={i}
+              type={'pastel'}
               
             />
           ))

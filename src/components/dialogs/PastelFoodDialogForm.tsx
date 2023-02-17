@@ -4,7 +4,7 @@ import BlackShoppingCart from '../../assets/shoppingcart-black.svg';
 import Bag from '../../assets/bag.svg';
 import { FormEvent, useEffect, useState } from "react";
 
-export function FoodDialogForm({tastes,foodPriceWithoutTastesAndExtras }: foodDialogFormProps) {
+export function PastelFoodDialogForm({tastes,foodPriceWithoutTastesAndExtras }: foodDialogFormProps) {
 
 
     const tastesToForm = tastes.map(taste => {

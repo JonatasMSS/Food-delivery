@@ -3,13 +3,25 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { ArrowLeft, Check } from 'phosphor-react';
 import { Hamburger } from "phosphor-react";
 import { Food } from '../Food';
-import { FoodDialogForm } from './FoodDialogForm';
+import { PastelFoodDialogForm } from './PastelFoodDialogForm';
 
 
-export function PastelFoodDialog({foodImage,name,tastes,price,description,showPrice = false}:foodDialogProps) {
-    
-    
- 
+
+export function FoodDialog({foodImage,name,tastes,price,description,showPrice = false, type}:foodDialogProps) {
+
+    function FoodDialogController(type:string){
+        if(type === 'PASTEL'){
+            return (
+                <PastelFoodDialogForm
+                    foodPriceWithoutTastesAndExtras={price}
+                    tastes={tastes}
+                />
+            )
+        }
+        else if(type === 'TAPIOCA'){
+            
+        }
+    }
 
     return (
         <Dialog.Root>
@@ -54,11 +66,9 @@ export function PastelFoodDialog({foodImage,name,tastes,price,description,showPr
                                 <span className='font-roboto-condensed font-bold text-defaultOrange text-xl'>R$ {price.toFixed(2)}</span>
                             </div>
                         </div>
-                        <FoodDialogForm
-                            tastes={tastes}
-                            
-                            foodPriceWithoutTastesAndExtras={price}
-                        />
+                        {
+                            FoodDialogController(type.toUpperCase())
+                        }
                     </div>
                 </Dialog.Content>
             </Dialog.Portal>
