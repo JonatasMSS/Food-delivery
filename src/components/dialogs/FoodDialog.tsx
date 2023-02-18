@@ -17,6 +17,7 @@ export function FoodDialog({foodImage,name,tastes,price,description,showPrice = 
                 <PastelFoodDialogForm
                     foodPriceWithoutTastesAndExtras={price}
                     tastes={tastes}
+                    baseTasteName={name}
                 />
             )
         }
@@ -25,6 +26,7 @@ export function FoodDialog({foodImage,name,tastes,price,description,showPrice = 
                 <TapiocaFoodDialogForm
                     tastes={tastes}
                     foodPriceWithoutTastesAndExtras={price}
+                    baseTasteName={name}
                 />
             )
         }
@@ -33,6 +35,7 @@ export function FoodDialog({foodImage,name,tastes,price,description,showPrice = 
                 <HamburguerFoodDialogForm 
                     tastes={tastes}
                     foodPriceWithoutTastesAndExtras={price}
+                    baseTasteName={name}
                 />
             )
         }

@@ -2,12 +2,15 @@ import Bag from '../../assets/bag.svg';
 import { FormEvent, useState } from "react";
 import { CheckboxFoodItem } from "../CheckboxFoodItem";
 import BlackShoppingCart from '../../assets/shoppingcart-black.svg';
+import { LocalStorageController } from '../../data/localDataStorageController';
+import { FoodToOrder } from '../../models/foodModel';
 
 
-export function TapiocaFoodDialogForm({tastes,foodPriceWithoutTastesAndExtras}:foodDialogFormProps){
+export function TapiocaFoodDialogForm({tastes,baseTasteName,foodPriceWithoutTastesAndExtras}:foodDialogFormProps){
 
 
-
+    const localDataStorage = new LocalStorageController();
+    
 
 
     const [tasteSelected,setTasteSelected] = useState<Array<{
@@ -21,6 +24,10 @@ export function TapiocaFoodDialogForm({tastes,foodPriceWithoutTastesAndExtras}:f
     function sendFoodToOrder(event:FormEvent){
         event.preventDefault();
         
+        
+
+        
+
         console.log({
             'Foods':tasteSelected,
             'Observation': foodObservation,

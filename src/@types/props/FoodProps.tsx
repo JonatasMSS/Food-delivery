@@ -24,7 +24,7 @@ interface FoodContainerProps {
 }
 interface foodDialogFormProps {
     foodPriceWithoutTastesAndExtras:number;
-    
+    baseTasteName:string;  
     tastes: Array<{
         tasteName:string,
         tastePrice:number

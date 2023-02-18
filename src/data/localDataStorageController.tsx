@@ -8,9 +8,10 @@ export class LocalStorageController{
         this.store = localStorage;
     }
     
-     putDataInStorage(key:string,data:string):boolean{
+     putDataInStorage(key:string,data:FoodToOrder[]):boolean{
+        const toStringData = JSON.stringify(data);
         try {  
-            localStorage.setItem(key, data);
+            localStorage.setItem(key, toStringData);
             return true
         } catch (error) {
             console.log('An error has ocurred:',error);
