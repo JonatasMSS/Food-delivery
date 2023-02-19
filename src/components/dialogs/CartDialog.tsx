@@ -7,6 +7,7 @@ import { CartFoodContainer } from "../CartFoodContainer";
 import { useEffect, useState } from "react";
 import { FoodToOrder } from "../../models/foodModel";
 import { LocalStorageController } from "../../data/localDataStorageController";
+import { PersonAddressDialog } from "./PersonAddressDialog";
 
 export function CartDialog() {
 
@@ -92,7 +93,7 @@ export function CartDialog() {
                         onClick={() => {setIsOpen(false)}}
                         
                         className="flex bg-softGreen p-2 rounded-lg items-center gap-2">
-                            <span className="font-roboto-condensed ">Confirmar pedido</span>
+                           
                             <img src={BlackCarrinho} alt="Carrinho" className="w-[20px]" />
                         </button>
 
