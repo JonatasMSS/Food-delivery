@@ -2,8 +2,9 @@ import BlackShoppingCart from '../../assets/shoppingcart-black.svg';
 import Bag from '../../assets/bag.svg';
 import { FormEvent, useEffect, useState } from "react";
 import { CheckboxFoodItem } from "../CheckboxFoodItem";
+import { FoodToOrder } from '../../models/foodModel';
 
-export function PastelFoodDialogForm({tastes,foodPriceWithoutTastesAndExtras }: foodDialogFormProps) {
+export function PastelFoodDialogForm({tastes,foodPriceWithoutTastesAndExtras,baseTasteName }: foodDialogFormProps) {
     const tastesToForm = tastes.map(taste => {
        return {
         tasteName: taste.tasteName,
@@ -26,6 +27,8 @@ export function PastelFoodDialogForm({tastes,foodPriceWithoutTastesAndExtras }: 
     function sendFoodToOrder(event:FormEvent){
         event.preventDefault();
         
+
+       
         console.log({
             'Foods':tasteSelected,
             'Observation': foodObservation,

@@ -4,13 +4,12 @@ import Logo from '../assets/Logo.svg';
 import { CartDialog } from './dialogs/CartDialog';
 import { FoodToOrder } from '../models/foodModel';
 import { LocalStorageController } from '../data/localDataStorageController';
+import { useEffect } from 'react';
 
 export function Header() {
 
   const FoodsCartInStorage = new LocalStorageController();
 
-  const FoodToOrder:FoodToOrder[] = FoodsCartInStorage.getDataFromStorage('foods') ?? [];
-  
   
 
   return (

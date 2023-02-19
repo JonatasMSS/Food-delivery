@@ -25,14 +25,23 @@ export function TapiocaFoodDialogForm({tastes,baseTasteName,foodPriceWithoutTast
         event.preventDefault();
         
         
-
+        const newFoodToCart:FoodToOrder = {
+            name:baseTasteName,
+            tastes:tasteSelected.map(taste => taste.tasteName),
+            totalPrice:totalValue,
+            observation:foodObservation
+        }
+        
+        const getFoodsInCart = localDataStorage.getDataFromStorage('foods');
+        const newFoodsInCart = [...getFoodsInCart?? [], newFoodToCart];
+        
         
 
-        console.log({
-            'Foods':tasteSelected,
-            'Observation': foodObservation,
-            'Total Value': totalValue
-        });
+        // console.log({
+        //     'Foods':tasteSelected,
+        //     'Observation': foodObservation,
+        //     'Total Value': totalValue
+        // });
 
         setTasteSelected([]);
         setFoodObservation('');

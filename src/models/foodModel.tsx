@@ -5,6 +5,7 @@ interface FoodModel{
     description?:string;
     totalPrice:number;
     tastes:Array<string>;
+    observation?:string;
 }
 
 
@@ -15,12 +16,14 @@ export class FoodToOrder{
     description?:string;
     totalPrice:number;
     tastes:Array<string>;
-    constructor({name,description,totalPrice,tastes,foodImage}:FoodModel){
+    observation?:string;
+    constructor({name,description,totalPrice,tastes,foodImage,observation}:FoodModel){
         this.name = name;
         this.description = description;
         this.totalPrice = totalPrice;
         this.tastes = tastes;
         this.foodImage = foodImage;
+        this.observation = observation;
     }
 
 

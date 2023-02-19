@@ -8,27 +8,30 @@ import { useEffect, useState } from "react";
 import { FoodToOrder } from "../../models/foodModel";
 import { LocalStorageController } from "../../data/localDataStorageController";
 
-
-
-
 export function CartDialog() {
     
 
-    const FoodsCartInStorage = new LocalStorageController();
-    const FoodInStorage = FoodsCartInStorage.getDataFromStorage('foods');
-
+    
+    
+    const localDataStorage = new LocalStorageController();
+    const [foodsInCart,setFoodsInCart] = useState<FoodToOrder[]>();
+    
     
 
-    const [foodsInCart,setFoodsInCart] = useState(FoodInStorage);
-    
-    useEffect(()=>{
-        setFoodsInCart(FoodInStorage);
-    },[])
-
+    function whenDialogIsOpen(open:boolean){
+        if(open){
+            const allFoodsInCart = localDataStorage.getDataFromStorage('foods');
+            setFoodsInCart(allFoodsInCart!);
+        }else{
+            setFoodsInCart([]);
+        }
+    }
 
 
     return (
-        <Dialog.Root>
+        <Dialog.Root
+            onOpenChange={whenDialogIsOpen}
+        >
             <Dialog.Trigger className="flex">
                 <span className='font-roboto-condensed font-normal text-sm'>Carrinho</span>
                 <img src={Carrinho} alt="Carrinho" className='w-5' />
