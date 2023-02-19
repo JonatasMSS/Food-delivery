@@ -35,7 +35,7 @@ export function TapiocaFoodDialogForm({tastes,baseTasteName,foodPriceWithoutTast
         const getFoodsInCart = localDataStorage.getDataFromStorage('foods');
         const newFoodsInCart = [...getFoodsInCart?? [], newFoodToCart];
         
-        
+        localDataStorage.putDataInStorage('foods',newFoodsInCart);
 
         // console.log({
         //     'Foods':tasteSelected,
