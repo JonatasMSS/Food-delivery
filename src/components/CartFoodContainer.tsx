@@ -21,7 +21,7 @@ export function CartFoodContainer({ foodImage, name, price, tastes, onRemoveClic
                 <span className="font-roboto-condensed font-bold ">{name}</span>
                 <span className="font-roboto-condensed font-bold text-defaultOrange">R$ {price.toFixed(2)}</span>
                 <button 
-                onClick={() => onRemoveClicked}
+                onClick={onRemoveClicked}
                 className="text-center bg-defaultRed p-2 rounded-full">
                     <X weight="bold" color="white" />
                 </button>

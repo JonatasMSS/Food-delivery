@@ -14,7 +14,7 @@ export function CartDialog() {
     
     
     const localDataStorage = new LocalStorageController();
-    const [foodsInCart,setFoodsInCart] = useState<FoodToOrder[]>();
+    const [foodsInCart,setFoodsInCart] = useState<FoodToOrder[]>([]);
     const [totalValue, setTotalValue] = useState<number>(0);
 
 
@@ -23,14 +23,22 @@ export function CartDialog() {
     function whenDialogIsOpen(open:boolean){
         if(open){
             const allFoodsInCart = localDataStorage.getDataFromStorage('foods');
-            setFoodsInCart(allFoodsInCart!);
-            const sumOfFoodsPrices = allFoodsInCart?.map(food => food.totalPrice).reduce((prev,next) => prev + next);
+            setFoodsInCart(allFoodsInCart ?? []);
+            const sumOfFoodsPrices = allFoodsInCart?.map(food => food.totalPrice).reduce((prev,next) => prev + next,0);
             setTotalValue(sumOfFoodsPrices ?? 0);
-        }else{
-            setFoodsInCart([]);
-            setTotalValue(0);
         }
     }
+
+    function removeFoodFromCart(index:number){
+       
+        localDataStorage.removeDataFromStorage('foods',index);
+        const allFoods = localDataStorage.getDataFromStorage('foods');
+        const sumOfFoodsPrices = allFoods?.map(food => food.totalPrice).reduce((prev,next) => prev + next,0);
+        setTotalValue(sumOfFoodsPrices ?? 0);
+        setFoodsInCart(allFoods ?? []);
+
+    }   
+    
 
 
     return (
@@ -55,14 +63,14 @@ export function CartDialog() {
                     <div className="w-full  pt-5 pb-20 px-2 flex flex-col max-h-vh-90 overflow-auto">
                         {
                             
-                            foodsInCart ? 
+                            foodsInCart.length > 0 ? 
                             foodsInCart.map((food,index) => (
                                 <CartFoodContainer
                                 key={index}
                                     name={food.name}
                                     price={food.totalPrice}
                                     tastes={food.tastes}
-                                    onRemoveClicked={()=> {}}
+                                    onRemoveClicked={() => removeFoodFromCart(index)}
 
                                 />
                             )):

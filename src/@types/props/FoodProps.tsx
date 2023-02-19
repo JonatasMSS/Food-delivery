@@ -48,5 +48,5 @@ interface CardFoodContainerProps {
     description?:string;
     price: number;
     tastes: Array<string>;
-    onRemoveClicked(index:number):void;
+    onRemoveClicked():void;
 }
