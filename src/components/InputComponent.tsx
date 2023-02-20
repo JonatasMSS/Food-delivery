@@ -48,7 +48,6 @@ export function InputComponent({...allData}:InputComponentProps) {
             <input id={allData.htmlFor} type={allData.type ?? 'text'}
                className="bg-gray-200 w-full border-2 flex-initial items-end border-gray-400/50 rounded-lg py-1 px-2 placeholder:font-roboto-condensed placeholder:pl-1 placeholder:text-gray-600"
                 placeholder={allData.placeholder}
-
             />
         </div>
     )
