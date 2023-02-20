@@ -4,7 +4,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { useState } from "react";
 import { ArrowLeft } from "phosphor-react";
 import { InputComponent } from "../InputComponent";
-
+import {WhatsappLogo} from "phosphor-react";
 interface PersonAddressDialogProps {
     isOpen: boolean;
     changeOpenState?(): void;
@@ -115,7 +115,14 @@ export function PersonAddressDialog({ isOpen = false, changeOpenState }: PersonA
                             reactCompType="obs"
                         />
 
-                        
+                        <div className="flex flex-col gap-2 w-full items-start my-5 ">
+                            <span className="font-roboto-condensed font-semibold text-xl">Valor do pedido: R$ 00,00</span>
+                            <button className="flex items-center gap-2 bg-softGreen p-2 rounded-lg">
+                                Enviar pedido para whatsapp
+                                <WhatsappLogo size={22}/>
+                            </button>
+                           
+                        </div>
                     </div>
                 </Dialog.Content>
             </Dialog.Portal>
