@@ -101,7 +101,7 @@ export function PersonAddressDialog({ isOpen = false, changeOpenState }: PersonA
                                 />
                                 <InputComponent
                                     label="Bairro para taxa"
-                                    type="text"
+                                    reactCompType="mChoose"
                                     inputSize="md"
                                     
                                 />
