@@ -8,11 +8,12 @@ interface InputComponentProps{
     label:string;   
     type?:HTMLInputTypeAttribute | undefined;
     inputSize?: inputSize | undefined;
+    reactCompType?: reactCompType | undefined;
 }
 
 
 type inputSize = | "sm" | "md" | "lg";
-
+type reactCompType = |"obs" | "mChoose" | "default";
 
 
 
@@ -20,10 +21,24 @@ type inputSize = | "sm" | "md" | "lg";
 
 export function InputComponent({...allData}:InputComponentProps) {
 
+    if(allData.reactCompType ==="obs"){
+        return (
+            <div className=" flex flex-col w-full">
+                <label className="font-roboto-condensed mb-2 font-semibold" >{allData.label}</label>
+                <textarea name={allData.htmlFor} id={allData.htmlFor} 
+                    className="bg-gray-200 w-full border-2 border-gray-400/50 rounded-lg h-32
+                    placeholder:text-gray-600 px-2 py-2"
+                    placeholder={allData.placeholder}
+                />
+
+               
+            </div>  
+        )
+    }
     
     return (
         <div className={
-            clsx("flex flex-col  max-w-fit ",{
+            clsx("flex flex-col",{
                 'w-[33%]':allData.inputSize === "sm",
                 'w-[66%]':allData.inputSize === "md",
                 'w-full':allData.inputSize === "lg" || undefined,
