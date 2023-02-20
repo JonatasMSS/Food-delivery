@@ -19,9 +19,29 @@ type reactCompType = | "obs" | "mChoose" | "default";
 
 
 
+
+
 export function InputComponent({ ...allData }: InputComponentProps) {
 
     const [districtItemValue, setDistrictItemValue] = useState<string | undefined>();
+
+    const ListDistrict:Array<ItemSelectorProps> = [
+        {
+            text:'Jardim Aeroporto',
+            value:1,
+            onSelected: (value,text) => {
+                setDistrictItemValue(text);
+            }
+        },
+        {
+            text:'Alto Boa Vista',
+            value:2,
+            onSelected:(value,text) =>{
+                setDistrictItemValue(text)
+            }
+        }
+    ]
+
 
     if (allData.reactCompType === "obs") {
         return (
@@ -48,19 +68,21 @@ export function InputComponent({ ...allData }: InputComponentProps) {
                         </button>
                     </DropdownMenu.Trigger>
                     <DropdownMenu.Portal>
-                        <DropdownMenu.Content className="bg-white border-2 border-softWhite rounded-lg p-2 flex-col flex w-fit">
+                        <DropdownMenu.Content className="bg-white border-2 border-softWhite rounded-lg p-2 flex-col flex w-fit ">
                             <DropdownMenu.Label className="font-roboto-condensed font-semibold">
                                 Bairros
                             </DropdownMenu.Label>
                             <DropdownMenu.Separator className="h-[1px] my-2 bg-gray-300" />
-                            <ItemSelector
-                                text="Jardim Aeroporto"
-                                value={1.00}
-                                onSelected={(value,text) => {
-                                        
-                                        setDistrictItemValue(text);
-                                }}
-                            />
+                                {
+                                  ListDistrict.map((district,i) => (
+                                    <ItemSelector
+                                        key={i}
+                                        text={district.text}
+                                        value={district.value}
+                                        onSelected={district.onSelected}
+                                    />
+                                  ))  
+                                }
                             <DropdownMenu.Arrow className="fill-softWhite" />
                         </DropdownMenu.Content>
                     </DropdownMenu.Portal>
@@ -88,6 +110,7 @@ export function InputComponent({ ...allData }: InputComponentProps) {
 
 
 
+
 interface ItemSelectorProps {
     value?: string | number;
     text?: string;
@@ -101,8 +124,10 @@ function ItemSelector({ ...allItemProps }: ItemSelectorProps) {
             onSelect={() => {
                 allItemProps.onSelected!(allItemProps.value,allItemProps.text) 
             }}
-            className="font-roboto-condensed">
-               {allItemProps.text} - R${allItemProps.value},00
+            className="flex items-center justify-between">
+              <span className="font-roboto-condensed"> {allItemProps.text}</span>
+              <span className="font-roboto-condensed mx-2"> + </span>
+              <span className="font-roboto-condensed">R${allItemProps.value},00</span>
         </DropdownMenu.Item>
 
     )
