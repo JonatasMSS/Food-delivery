@@ -9,6 +9,7 @@ interface InputComponentProps {
     type?: HTMLInputTypeAttribute | undefined;
     inputSize?: inputSize | undefined;
     reactCompType?: reactCompType | undefined;
+    listItens?: Array<ItemSelectorProps>;
 }
 
 
@@ -23,24 +24,17 @@ type reactCompType = | "obs" | "mChoose" | "default";
 
 export function InputComponent({ ...allData }: InputComponentProps) {
 
-    const [districtItemValue, setDistrictItemValue] = useState<string | undefined>();
+    const [inputDropdownValue, setInputDropdownListValue] = useState<string | undefined>(allData.placeholder);
 
-    const ListDistrict:Array<ItemSelectorProps> = [
-        {
-            text:'Jardim Aeroporto',
-            value:1,
-            onSelected: (value,text) => {
-                setDistrictItemValue(text);
-            }
-        },
-        {
-            text:'Alto Boa Vista',
-            value:2,
-            onSelected:(value,text) =>{
-                setDistrictItemValue(text)
-            }
+    const ListItem:Array<ItemSelectorProps> = allData.listItens?.map((data,i) => {
+        return {
+            text: data.text,
+            value: data.value,
+            onSelected(value, text) {
+                setInputDropdownListValue(text);
+            },
         }
-    ]
+    }) ?? []
 
 
     if (allData.reactCompType === "obs") {
@@ -62,19 +56,17 @@ export function InputComponent({ ...allData }: InputComponentProps) {
                 <label className="font-roboto-condensed mb-2 font-semibold" >{allData.label}</label>
                 <DropdownMenu.Root>
                     <DropdownMenu.Trigger asChild>
-                        <button className="bg-gray-200 w-full  flex border-2 flex-initial items-start border-gray-400/50 rounded-lg py-1 px-2 gap-2 ">
-                            <span className="font-roboto-condensed truncate">{districtItemValue ?? 'Bairro para taxa'}</span>
+                        <button className="bg-gray-200 w-full justify-between flex border-2 flex-initial items-start border-gray-400/50 rounded-lg py-1 px-2 gap-2 ">
+                            <span className="font-roboto-condensed truncate">{inputDropdownValue ?? allData.placeholder}</span>
                             <ArrowDown weight="fill" size={22} />
                         </button>
                     </DropdownMenu.Trigger>
                     <DropdownMenu.Portal>
-                        <DropdownMenu.Content className="bg-white border-2 border-softWhite rounded-lg p-2 flex-col flex w-fit ">
-                            <DropdownMenu.Label className="font-roboto-condensed font-semibold">
-                                Bairros
-                            </DropdownMenu.Label>
+                        <DropdownMenu.Content  className="bg-white border-2 gap-3 border-softWhite rounded-lg p-2 flex-col flex  w-40 ">
+                            
                             <DropdownMenu.Separator className="h-[1px] my-2 bg-gray-300" />
                                 {
-                                  ListDistrict.map((district,i) => (
+                                  ListItem.map((district,i) => (
                                     <ItemSelector
                                         key={i}
                                         text={district.text}
@@ -111,11 +103,6 @@ export function InputComponent({ ...allData }: InputComponentProps) {
 
 
 
-interface ItemSelectorProps {
-    value?: string | number;
-    text?: string;
-    onSelected?(prop?:string|number, text?:string): void;
-}
 
 function ItemSelector({ ...allItemProps }: ItemSelectorProps) {
     return (
@@ -126,8 +113,13 @@ function ItemSelector({ ...allItemProps }: ItemSelectorProps) {
             }}
             className="flex items-center justify-between">
               <span className="font-roboto-condensed"> {allItemProps.text}</span>
-              <span className="font-roboto-condensed mx-2"> + </span>
-              <span className="font-roboto-condensed">R${allItemProps.value},00</span>
+              {
+                allItemProps.value && <span className="font-roboto-condensed mx-2"> + </span>
+              }
+              {
+                
+                allItemProps.value && <span className="font-roboto-condensed">R${allItemProps.value},00</span>
+              }
         </DropdownMenu.Item>
 
     )

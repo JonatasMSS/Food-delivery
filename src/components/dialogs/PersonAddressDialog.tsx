@@ -5,14 +5,43 @@ import { useState } from "react";
 import { ArrowLeft } from "phosphor-react";
 import { InputComponent } from "../InputComponent";
 import {WhatsappLogo} from "phosphor-react";
+import { FoodToOrder } from "../../models/foodModel";
 interface PersonAddressDialogProps {
     isOpen: boolean;
     changeOpenState?(): void;
+    foodsToOrder: FoodToOrder[];
 }
 
-export function PersonAddressDialog({ isOpen = false, changeOpenState }: PersonAddressDialogProps) {
+export function PersonAddressDialog({ isOpen = false, changeOpenState,foodsToOrder }: PersonAddressDialogProps) {
 
+    const listDisctricts:Array<ItemSelectorProps> = [
+        {
+            text:'Jardim Aeroporto',
+            value:1,
+            
+        },
+        {
+            text:'Alto Boa Vista',
+            value:2,
+            
+        }
+    ];
+    const listOfPayments:Array<ItemSelectorProps> = [
+        {
+            text:'Débito',
+            
+        },
+        {
+            text:'Crédito'
+        },
+        {
+            text:'Em espécie'
+        },
+        {
+            text:'Pix'
+        }
 
+    ]
 
     return (
         <Dialog.Root
@@ -93,22 +122,25 @@ export function PersonAddressDialog({ isOpen = false, changeOpenState }: PersonA
                             placeholder="Ao lade de, próximo à, etc..."
                         />
                         <span className="font-roboto-condensed font-bold text-xl my-4">Informações para pagamento</span>
-                        <div className="flex gap-2 mt-4 mb-4 items-center">
+                        <div className="flex gap-1 mt-4 mb-4 items-center">
                                 <InputComponent
                                     label="Forma de pagamento"
-                                    type="text"
+                                    reactCompType="mChoose"
                                     inputSize="lg"
+                                    placeholder="Forma de pagamento"
+                                    listItens={listOfPayments}
                                 />
                                 <InputComponent
                                     label="Bairro para taxa"
                                     reactCompType="mChoose"
                                     inputSize="md"
+                                    placeholder="Bairro p/ taxa"
+                                    listItens={listDisctricts}
                                     
                                 />
                         </div>
                         
                         <InputComponent
-                        
                             label="Observações"
                             htmlFor="observation"
                             placeholder="Observações na entrega ou em algum pedido"
@@ -117,7 +149,9 @@ export function PersonAddressDialog({ isOpen = false, changeOpenState }: PersonA
 
                         <div className="flex flex-col gap-2 w-full items-start my-5 ">
                             <span className="font-roboto-condensed font-semibold text-xl">Valor do pedido: R$ 00,00</span>
-                            <button className="flex items-center gap-2 bg-softGreen p-2 rounded-lg">
+                            <button 
+                            onClick={() => {console.log(foodsToOrder)}}
+                            className="flex items-center gap-2 bg-softGreen p-2 rounded-lg">
                                 Enviar pedido para whatsapp
                                 <WhatsappLogo size={22}/>
                             </button>

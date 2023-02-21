@@ -109,6 +109,7 @@ export function CartDialog() {
             </Dialog.Root>
             <PersonAddressDialog
                 isOpen={isPersonDialogOpen}
+                foodsToOrder={foodsInCart}
                 changeOpenState={() => {
                    isPersonDialogOpen ? setPersonDialogOpen(false):setPersonDialogOpen(true);
                 }}

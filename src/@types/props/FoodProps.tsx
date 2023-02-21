@@ -1,5 +1,11 @@
 
 
+interface ItemSelectorProps {
+    value?: string | number;
+    text?: string;
+    onSelected?(prop?:string|number, text?:string): void;
+}
+
 
 interface foodDialogProps{
     foodImage?: string;
