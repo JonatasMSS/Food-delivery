@@ -59,7 +59,7 @@ export function FoodDialog({foodImage,name,tastes,price,description,showPrice = 
                 <Dialog.Overlay
                     className=' w-screen h-screen bg-black/80 fixed inset-0'
                 />
-                <Dialog.Content className='absolute max-h-vh-90 overflow-y-auto rounded-lg w-10/12 bg-softWhite top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+                <Dialog.Content className='fixed max-h-vh-90 overflow-y-auto rounded-lg w-10/12 bg-softWhite top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
                     <Dialog.Title
                         className='bg-defaultBackground pl-10 text-white p-2 font-roboto-condensed font-bold text-xl'
                     >Escolha de Pedido</Dialog.Title>

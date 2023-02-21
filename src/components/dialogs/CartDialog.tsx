@@ -103,7 +103,7 @@ export function CartDialog() {
                                 }
                                 }
 
-                                className="flex bg-softGreen p-2 rounded-lg items-center gap-2 disabled:text-gray-600 bg-softGreen/60">
+                                className="flex bg-softGreen p-2 rounded-lg items-center gap-2 disabled:text-gray-600 disabled:bg-softGreen/60">
 
                                 <img src={BlackCarrinho} alt="Carrinho" className="w-[20px]" />
                                 <span>Confirmar pedido</span>

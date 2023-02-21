@@ -103,9 +103,8 @@ export const LocalListData:Array<foodDialogProps> = [
         type:'tapioca'
     },
     {
-        name:'hamburguer',
+        name:'Hamburguer',
         price:0.00,
-        description:'Pão,carne,salada e molho especial',
         tastes:[
             {
                 tasteName:'Hamburguer',
@@ -138,5 +137,46 @@ export const LocalListData:Array<foodDialogProps> = [
         ],
         type:'hamburguer',
 
+    },
+    {
+        name:'Janta',
+        price:0,
+        tastes:[
+            {
+                tasteName:"Sopa 500ML",
+                tastePrice: 7.00,
+
+            },
+            {
+                tasteName:"Sopa 1L",
+                tastePrice: 13.00,
+
+            },
+            {
+                tasteName:"Cuscuz recheado",
+                tastePrice:8.00
+            },
+            {
+                tasteName:"Munguza 500ML",
+                tastePrice:6.00
+            },
+            {
+                tasteName:"Munguza 1L",
+                tastePrice: 12.00,
+
+            },
+        ],
+        type:'tapioca'
+    },
+    {
+        name:"Cachorro quente",
+        price:0.00,
+        type:'tapioca',
+        tastes:[
+            {
+                tasteName:"Cachorro quente",
+                tastePrice:6.00
+            }
+        ]
     }
 ];

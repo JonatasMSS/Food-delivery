@@ -139,7 +139,9 @@ export function PastelFoodDialogForm({tastes,foodPriceWithoutTastesAndExtras,bas
             </div>
             <div className='flex w-full p-2 justify-between items-center gap-3'>
                 <span className='font-roboto-condensed font-bold text-base'>Valor Total: RS {totalValue.toFixed(2)}</span>
-                <button className='flex p-1  bg-softGreen items-center justify-center rounded-lg font-roboto-condensed'>
+                <button 
+                disabled={ tasteSelected.length < 3}
+                className='flex p-1 disabled:bg-softGreen/60 disabled:text-gray-600 bg-softGreen items-center justify-center rounded-lg font-roboto-condensed'>
                     <img src={BlackShoppingCart} width={19} />
                     Adicionar ao carrinho
                 </button>
