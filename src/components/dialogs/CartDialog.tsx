@@ -9,6 +9,8 @@ import { FoodToOrder } from "../../models/foodModel";
 import { LocalStorageController } from "../../data/localDataStorageController";
 import { PersonAddressDialog } from "./PersonAddressDialog";
 
+
+
 export function CartDialog() {
 
 
@@ -19,7 +21,7 @@ export function CartDialog() {
     const [totalValue, setTotalValue] = useState<number>(0);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [isPersonDialogOpen, setPersonDialogOpen] = useState<boolean>(false);
-
+    
 
     function whenDialogIsOpen() {
 
@@ -91,13 +93,17 @@ export function CartDialog() {
                         <div className="absolute inset-0 top-[90%] z-10 rounded-b-lg bg-white h-fit flex w-full justify-between items-center p-2">
                             <span className="font-roboto-condensed font-bold text-xl">Valor total: RS {totalValue.toFixed(2)}</span>
                             <button
+                                disabled={ foodsInCart.length === 0}
                                 onClick={() => {
+                                    
                                     setIsOpen(false)
                                     setPersonDialogOpen(true);
+
+
                                 }
                                 }
 
-                                className="flex bg-softGreen p-2 rounded-lg items-center gap-2">
+                                className="flex bg-softGreen p-2 rounded-lg items-center gap-2 disabled:text-gray-600 bg-softGreen/60">
 
                                 <img src={BlackCarrinho} alt="Carrinho" className="w-[20px]" />
                                 <span>Confirmar pedido</span>
@@ -112,7 +118,7 @@ export function CartDialog() {
                 orderPrice={totalValue}
                 foodsToOrder={foodsInCart}
                 changeOpenState={() => {
-                   isPersonDialogOpen ? setPersonDialogOpen(false):setPersonDialogOpen(true);
+                    isPersonDialogOpen ? setPersonDialogOpen(false) : setPersonDialogOpen(true);
                 }}
             />
 

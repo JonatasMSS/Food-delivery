@@ -10,12 +10,13 @@ import ReactWhatsapp from 'react-whatsapp';
 import { OrderModel } from "../../models/orderModel";
 interface PersonAddressDialogProps {
     isOpen: boolean;
+    setIsOpen?:React.Dispatch<React.SetStateAction<boolean>>;
     changeOpenState?(): void;
     foodsToOrder: FoodToOrder[];
     orderPrice:number;
 }
 
-export function PersonAddressDialog({ isOpen = false, changeOpenState,foodsToOrder ,orderPrice}: PersonAddressDialogProps) {
+export function PersonAddressDialog({ isOpen = false, changeOpenState,setIsOpen,foodsToOrder ,orderPrice}: PersonAddressDialogProps) {
 
     const listDisctricts:Array<ItemSelectorProps> = [
         {
@@ -59,12 +60,17 @@ export function PersonAddressDialog({ isOpen = false, changeOpenState,foodsToOrd
 
     const [taxeInFormValue, setTaxeInFormValue] = useState<number>();
 
-    const [finalOrderValue,setFinalOrderValue] = useState<number>(orderPrice);
+    const [finalOrderValue,setFinalOrderValue] = useState<number>();
     
     
 
 
-    
+    useEffect(()=>{
+        const newFinalOrderValue = orderPrice + (taxeInFormValue ?? 0);
+        setFinalOrderValue(newFinalOrderValue);
+       
+
+    },[taxeInFormValue])
 
 
     function sendToWhatsApp(number:number=5583987141424,order:OrderModel){
@@ -77,8 +83,8 @@ export function PersonAddressDialog({ isOpen = false, changeOpenState,foodsToOrd
         const addressPerson = order.personData.address;
 
 
-        const endereco = `\n\n====== Endereço para entrega =====\n - Endereço:${addressPerson.address}, ${addressPerson.numberAddres}\n - Complemento:${addressPerson.complement}\n - Bairro:${addressPerson.district}\n - Ponto de Referência:${addressPerson.reference}\n - Observações:${addressPerson.observation}\n`
-        const pagamento = `===== Pagamento ====\n - Forma de pagamento:${order.personData.payment_method}\n - Bairro c/ taxa: ${order.personData.districtTaxe} - RS${order.personData.taxeValue?.toFixed(2)}`
+        const endereco = `\n\n====== Endereço para entrega =====\n - Endereço:${addressPerson.address}, ${addressPerson.numberAddres}\n - Complemento:${addressPerson.complement}\n - Bairro:${addressPerson.district}\n - Ponto de Referência:${addressPerson.reference ?? 'Nenhum'}\n - Observações:${addressPerson.observation}\n`
+        const pagamento = `===== Pagamento ====\n - Forma de pagamento:${order.personData.payment_method}\n - Bairro c/ taxa: ${order.personData.districtTaxe} - RS${order.personData.taxeValue?.toFixed(2)} \n - Valor total do pedido: RS${order.orderValue?.toFixed(2)}`
 
        let url = `https://api.whatsapp.com/send/?phone=${number}`
        const title = `Olá, me chamo ${order.personData.name} e gostaria dos seguintes pedidos:\n`;
@@ -89,16 +95,32 @@ export function PersonAddressDialog({ isOpen = false, changeOpenState,foodsToOrd
 
          url+= `&text=${encodeURI(text)}`
        
-        // window.open(url);
-        console.log(text);
-
+        window.open(url);
+       
     }
 
 
 
     function onSubmitForm(event:FormEvent){
         
-        
+        if(!nameInForm){
+            event.preventDefault()
+            return alert('Por favor, digite o seu nome')
+        }
+        if(!addressInForm || !numberAddressInForm){
+            event.preventDefault()
+            return alert("Por favor, digite seu endereço e/ou o numero da casa")
+        }
+        if(!complementInForm || !districtInForm){
+            event.preventDefault()
+            return alert("Por favor, digite o complemento e/ou o bairro")
+        }
+        if(!paymentInForm || !districtInForm){
+            event.preventDefault()
+            return alert("Escolha um metodo de pagamento e o bairro onde vive");
+        }
+
+
         const Order = new OrderModel({
             foodsToCartModel:foodsToOrder,
             personData:{
@@ -119,9 +141,12 @@ export function PersonAddressDialog({ isOpen = false, changeOpenState,foodsToOrd
             orderValue:finalOrderValue
         })
         sendToWhatsApp(5583987141424,Order);
-        console.log(Order);
-        event.preventDefault()
+        localStorage.clear();
+       
     }
+
+
+    
 
 
     return (
@@ -137,7 +162,7 @@ export function PersonAddressDialog({ isOpen = false, changeOpenState,foodsToOrd
 
                 <Dialog.Content className="fixed rounded-lg inset-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] overflow-y-clip bg-white ">
                     <Dialog.Title className="bg-defaultBackground  rounded-t-lg flex items-center p-2">
-                        <Dialog.Close >
+                        <Dialog.Close onClick={() => setTaxeInFormValue(0)}>
                             <ArrowLeft size={22} weight="bold" color="white" />
                         </Dialog.Close>
                         <span className="font-roboto-condensed ml-3 font-bold text-softWhite">Dados para entrega</span>
@@ -238,7 +263,7 @@ export function PersonAddressDialog({ isOpen = false, changeOpenState,foodsToOrd
                       
 
                         <div className="flex flex-col gap-2 w-full items-start my-5 ">
-                            <span className="font-roboto-condensed font-semibold text-xl">Valor do pedido: R$ {finalOrderValue.toFixed(2)}</span>
+                            <span className="font-roboto-condensed font-semibold text-xl">Valor do pedido: R$ {finalOrderValue ? finalOrderValue.toFixed(2) : orderPrice.toFixed(2)}</span>
                             <button 
                             type="submit"
                            
