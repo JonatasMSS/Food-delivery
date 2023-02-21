@@ -1,12 +1,12 @@
 
 
 import * as Dialog from "@radix-ui/react-dialog";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { ArrowLeft } from "phosphor-react";
 import { InputComponent } from "../InputComponent";
 import {WhatsappLogo} from "phosphor-react";
 import { FoodToOrder } from "../../models/foodModel";
-
+import ReactWhatsapp from 'react-whatsapp';
 interface PersonAddressDialogProps {
     isOpen: boolean;
     changeOpenState?(): void;
@@ -14,7 +14,7 @@ interface PersonAddressDialogProps {
     orderPrice:number;
 }
 
-export function PersonAddressDialog({ isOpen = false, changeOpenState,foodsToOrder ,orderPrice = 0}: PersonAddressDialogProps) {
+export function PersonAddressDialog({ isOpen = false, changeOpenState,foodsToOrder ,orderPrice}: PersonAddressDialogProps) {
 
     const listDisctricts:Array<ItemSelectorProps> = [
         {
@@ -58,17 +58,32 @@ export function PersonAddressDialog({ isOpen = false, changeOpenState,foodsToOrd
 
     const [taxeInFormValue, setTaxeInFormValue] = useState<number>();
 
+    const [finalOrderValue,setFinalOrderValue] = useState<number>(orderPrice);
+    
+    
+
+
+    
+
+
     function sendToWhatsApp(number:number=5583987141424){
-       let url = `https://web.whatsapp.com/send?phone=${number}`
-       const title = "Olá, me chamo Jonatas Miguel e gostaria do seguinte pedido:";
-       const pedidos 
-       = `\n\n ◉ Pastel de Frito na hora: \n-Com Carne\n-Com Cheddar`
+        const pedidos =  `${foodsToOrder.map((food,index) =>{
+            const tastes = food.tastes;
+            const observation = food.observation ? `\nOBS:${food.observation}` : "\nOBS: Nenhuma observação"
+            return `\n ◉ ${food.name}:\n${tastes.map((taste) => `\n- ${taste}`)+"\n"+ observation + "\n"}`
+        }).toString().replaceAll(',','')}`
+
+
+       let url = `https://api.whatsapp.com/send/?phone=${number}`
+       const title = "Olá, me chamo Jonatas Miguel e gostaria dos seguintes pedidos:\n";
+       
         const text = title + pedidos
-        console.log(text);
+        
+
+
        url+= `&text=${encodeURI(text)}`
        
-       window.open(url);
-        
+        window.open(url);
 
     }
 
@@ -77,21 +92,21 @@ export function PersonAddressDialog({ isOpen = false, changeOpenState,foodsToOrd
     function onSubmitForm(event:FormEvent){
         event.preventDefault();
         sendToWhatsApp();
-        console.log({
-            name:nameInForm,
-            number: numberInForm,
-            address:{
-                address:addressInForm,
-                numberAddres:numberAddressInForm,
-                complement: complementInForm,
-                district: districtInForm,
-                reference: referenceInForm
-            },
-            payment_method: paymentInForm,
-            districtTaxe: districtTaxeInForm,
-            taxaValor: taxeInFormValue,
-            foods: foodsToOrder
-        })
+        // console.log({
+        //     name:nameInForm,
+        //     number: numberInForm,
+        //     address:{
+        //         address:addressInForm,
+        //         numberAddres:numberAddressInForm,
+        //         complement: complementInForm,
+        //         district: districtInForm,
+        //         reference: referenceInForm
+        //     },
+        //     payment_method: paymentInForm,
+        //     districtTaxe: districtTaxeInForm,
+        //     taxaValor: taxeInFormValue,
+        //     foods: foodsToOrder
+        // })
     }
 
 
@@ -203,10 +218,13 @@ export function PersonAddressDialog({ isOpen = false, changeOpenState,foodsToOrd
                             htmlFor="observation"
                             placeholder="Observações na entrega ou em algum pedido"
                             reactCompType="obs"
+                            onChangeRS={setObservationInForm}
                         />
+                        
+                      
 
                         <div className="flex flex-col gap-2 w-full items-start my-5 ">
-                            <span className="font-roboto-condensed font-semibold text-xl">Valor do pedido: R$ {orderPrice.toFixed(2)}</span>
+                            <span className="font-roboto-condensed font-semibold text-xl">Valor do pedido: R$ {finalOrderValue.toFixed(2)}</span>
                             <button 
                             type="submit"
                            
