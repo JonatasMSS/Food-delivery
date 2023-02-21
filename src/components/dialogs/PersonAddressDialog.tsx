@@ -7,6 +7,7 @@ import { InputComponent } from "../InputComponent";
 import {WhatsappLogo} from "phosphor-react";
 import { FoodToOrder } from "../../models/foodModel";
 import ReactWhatsapp from 'react-whatsapp';
+import { OrderModel } from "../../models/orderModel";
 interface PersonAddressDialogProps {
     isOpen: boolean;
     changeOpenState?(): void;
@@ -66,47 +67,60 @@ export function PersonAddressDialog({ isOpen = false, changeOpenState,foodsToOrd
     
 
 
-    function sendToWhatsApp(number:number=5583987141424){
-        const pedidos =  `${foodsToOrder.map((food,index) =>{
+    function sendToWhatsApp(number:number=5583987141424,order:OrderModel){
+        const pedidos =  `${order.foodsToCartModel.map((food,index) =>{
             const tastes = food.tastes;
             const observation = food.observation ? `\nOBS:${food.observation}` : "\nOBS: Nenhuma observação"
             return `\n ◉ ${food.name}:\n${tastes.map((taste) => `\n- ${taste}`)+"\n"+ observation + "\n"}`
         }).toString().replaceAll(',','')}`
 
+        const addressPerson = order.personData.address;
+
+
+        const endereco = `\n\n====== Endereço para entrega =====\n - Endereço:${addressPerson.address}, ${addressPerson.numberAddres}\n - Complemento:${addressPerson.complement}\n - Bairro:${addressPerson.district}\n - Ponto de Referência:${addressPerson.reference}\n - Observações:${addressPerson.observation}\n`
+        const pagamento = `===== Pagamento ====\n - Forma de pagamento:${order.personData.payment_method}\n - Bairro c/ taxa: ${order.personData.districtTaxe} - RS${order.personData.taxeValue?.toFixed(2)}`
 
        let url = `https://api.whatsapp.com/send/?phone=${number}`
-       const title = "Olá, me chamo Jonatas Miguel e gostaria dos seguintes pedidos:\n";
+       const title = `Olá, me chamo ${order.personData.name} e gostaria dos seguintes pedidos:\n`;
        
-        const text = title + pedidos
+        const text = title + pedidos + endereco + pagamento;
         
 
 
-       url+= `&text=${encodeURI(text)}`
+         url+= `&text=${encodeURI(text)}`
        
-        window.open(url);
+        // window.open(url);
+        console.log(text);
 
     }
 
 
 
     function onSubmitForm(event:FormEvent){
-        event.preventDefault();
-        sendToWhatsApp();
-        // console.log({
-        //     name:nameInForm,
-        //     number: numberInForm,
-        //     address:{
-        //         address:addressInForm,
-        //         numberAddres:numberAddressInForm,
-        //         complement: complementInForm,
-        //         district: districtInForm,
-        //         reference: referenceInForm
-        //     },
-        //     payment_method: paymentInForm,
-        //     districtTaxe: districtTaxeInForm,
-        //     taxaValor: taxeInFormValue,
-        //     foods: foodsToOrder
-        // })
+        
+        
+        const Order = new OrderModel({
+            foodsToCartModel:foodsToOrder,
+            personData:{
+                name:nameInForm,
+            number: numberInForm,
+            address:{
+                address:addressInForm,
+                numberAddres:numberAddressInForm,
+                complement: complementInForm,
+                district: districtInForm,
+                reference: referenceInForm,
+                observation:observationInForm
+            },
+            payment_method: paymentInForm,
+            districtTaxe: districtTaxeInForm,
+            taxeValue: taxeInFormValue,
+            },
+            orderValue:finalOrderValue
+        })
+        sendToWhatsApp(5583987141424,Order);
+        console.log(Order);
+        event.preventDefault()
     }
 
 
