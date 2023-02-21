@@ -10,11 +10,16 @@ interface InputComponentProps {
     inputSize?: inputSize | undefined;
     reactCompType?: reactCompType | undefined;
     listItens?: Array<ItemSelectorProps>;
+    onChangeRS?:React.Dispatch<React.SetStateAction<string | undefined>> 
+    onChangeRN?:React.Dispatch<React.SetStateAction<number | undefined>> //Change 
+    
+
+
 }
 
 
 type inputSize = | "sm" | "md" | "lg";
-type reactCompType = | "obs" | "mChoose" | "default";
+type reactCompType = | "obs" | "mChoose";
 
 
 
@@ -25,6 +30,7 @@ type reactCompType = | "obs" | "mChoose" | "default";
 export function InputComponent({ ...allData }: InputComponentProps) {
 
     const [inputDropdownValue, setInputDropdownListValue] = useState<string | undefined>(allData.placeholder);
+   
 
     const ListItem:Array<ItemSelectorProps> = allData.listItens?.map((data,i) => {
         return {
@@ -32,6 +38,8 @@ export function InputComponent({ ...allData }: InputComponentProps) {
             value: data.value,
             onSelected(value, text) {
                 setInputDropdownListValue(text);
+                allData.onChangeRS?.(text);
+                allData.onChangeRN?.(parseInt(value))
             },
         }
     }) ?? []
@@ -42,6 +50,9 @@ export function InputComponent({ ...allData }: InputComponentProps) {
             <div className=" flex flex-col w-full">
                 <label className="font-roboto-condensed mb-2 font-semibold" >{allData.label}</label>
                 <textarea name={allData.htmlFor} id={allData.htmlFor}
+                    onChange={(event) => {
+                        allData.onChangeRS?.(event.target.value);
+                    }}
                     className="bg-gray-200 w-full border-2 border-gray-400/50 rounded-lg h-32
                     placeholder:text-gray-600 px-2 py-2"
                     placeholder={allData.placeholder}
@@ -72,6 +83,7 @@ export function InputComponent({ ...allData }: InputComponentProps) {
                                         text={district.text}
                                         value={district.value}
                                         onSelected={district.onSelected}
+                                        
                                     />
                                   ))  
                                 }
@@ -93,6 +105,9 @@ export function InputComponent({ ...allData }: InputComponentProps) {
         }>
             <label htmlFor={allData.htmlFor} className="font-roboto-condensed mb-2 font-semibold ">{allData.label}</label>
             <input id={allData.htmlFor} type={allData.type ?? 'text'}
+                onChange={(event) => {
+                    allData.onChangeRS?.(event.target.value)
+                }}
                 className="bg-gray-200 w-full border-2 flex-initial items-end border-gray-400/50 rounded-lg py-1 px-2 placeholder:font-roboto-condensed placeholder:pl-1 placeholder:text-gray-600"
                 placeholder={allData.placeholder}
             />
@@ -110,6 +125,7 @@ function ItemSelector({ ...allItemProps }: ItemSelectorProps) {
             textValue={allItemProps.value?.toString()}
             onSelect={() => {
                 allItemProps.onSelected!(allItemProps.value,allItemProps.text) 
+               
             }}
             className="flex items-center justify-between">
               <span className="font-roboto-condensed"> {allItemProps.text}</span>

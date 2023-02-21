@@ -2,13 +2,13 @@ import Bag from '../../assets/bag.svg';
 import { FormEvent, useState } from "react";
 import { CheckboxFoodItem } from "../CheckboxFoodItem";
 import BlackShoppingCart from '../../assets/shoppingcart-black.svg';
+import { FoodToOrder } from '../../models/foodModel';
+import { LocalStorageController } from '../../data/localDataStorageController';
 
 
-export function HamburguerFoodDialogForm({tastes,foodPriceWithoutTastesAndExtras}:foodDialogFormProps){
+export function HamburguerFoodDialogForm({tastes,foodPriceWithoutTastesAndExtras,baseTasteName}:foodDialogFormProps){
 
-
-
-
+    const localDataStorage = new LocalStorageController();
 
     const [tasteSelected,setTasteSelected] = useState<Array<{
         tasteName:string,
@@ -21,11 +21,19 @@ export function HamburguerFoodDialogForm({tastes,foodPriceWithoutTastesAndExtras
     function sendFoodToOrder(event:FormEvent){
         event.preventDefault();
         
-        console.log({
-            'Foods':tasteSelected,
-            'Observation': foodObservation,
-            'Total Value': totalValue
-        });
+        const newFoodToCart: FoodToOrder = {
+            name: baseTasteName,
+            tastes:tasteSelected.map(taste => taste.tasteName),
+            totalPrice:totalValue,
+            observation: foodObservation
+        }
+
+       
+        const getFoodsInCart = localDataStorage.getDataFromStorage('foods');
+        const newFoodsInCart = [...getFoodsInCart?? [], newFoodToCart];
+        
+
+        localDataStorage.putDataInStorage('foods',newFoodsInCart);
 
         setTasteSelected([]);
         setFoodObservation('');

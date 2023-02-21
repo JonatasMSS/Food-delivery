@@ -103,10 +103,14 @@ export const LocalListData:Array<foodDialogProps> = [
         type:'tapioca'
     },
     {
-        name:'Hamburguer',
-        price:7.00,
+        name:'hamburguer',
+        price:0.00,
         description:'Pão,carne,salada e molho especial',
         tastes:[
+            {
+                tasteName:'Hamburguer',
+                tastePrice:7.00
+            },
             {
                 tasteName:'X-Misto ( Hamburguer + queijo e presunto)',
                 tastePrice:8.00

@@ -1,9 +1,11 @@
 
 
 interface ItemSelectorProps {
-    value?: string | number;
+    value?: number;
     text?: string;
-    onSelected?(prop?:string|number, text?:string): void;
+    onSelected?(prop?:any, text?:string): void;
+   
+    
 }
 
 
