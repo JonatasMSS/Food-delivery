@@ -143,12 +143,12 @@ export const LocalListData:Array<foodDialogProps> = [
         price:0,
         tastes:[
             {
-                tasteName:"Sopa 500ML",
+                tasteName:"Caldo de sopa 500ML",
                 tastePrice: 7.00,
 
             },
             {
-                tasteName:"Sopa 1L",
+                tasteName:"Caldo de sopa 1L",
                 tastePrice: 13.00,
 
             },
@@ -176,6 +176,45 @@ export const LocalListData:Array<foodDialogProps> = [
             {
                 tasteName:"Cachorro quente",
                 tastePrice:6.00
+            }
+        ]
+    },
+    {
+        name:'Bebidas',
+        price:0,
+        type:'bebida',
+        tastes:[
+            {
+                tasteName:'Dore 200ML - Cola',
+                tastePrice:2
+            },
+            {
+                tasteName:'Dore 200ML - Laranja',
+                tastePrice:2
+            },
+            {
+                tasteName:'Dore 200ML - Uva',
+                tastePrice:2
+            },
+            {
+                tasteName:'Dore 200ML - Limão',
+                tastePrice:2
+            },
+            {
+                tasteName:'Dore 200ML - Guarana',
+                tastePrice:2
+            },
+            {
+                tasteName:'Guarana Antartica 1L',
+                tastePrice:8.00,
+            },
+            {
+                tasteName:'Coca-Cola 1,5L',
+                tastePrice:10.00,
+            },
+            {
+                tasteName:'Refrigerante Refri - 2L',
+                tastePrice:7.00
             }
         ]
     }

@@ -30,7 +30,7 @@ export function FoodDialog({foodImage,name,tastes,price,description,showPrice = 
                 />
             )
         }
-        else if(type === 'HAMBURGUER'){
+        else if(type === 'HAMBURGUER' || type === 'BEBIDA'){
             return(
                 <HamburguerFoodDialogForm 
                     tastes={tastes}
@@ -39,6 +39,7 @@ export function FoodDialog({foodImage,name,tastes,price,description,showPrice = 
                 />
             )
         }
+        
     }
 
     return (
