@@ -19,6 +19,7 @@ export function BodyContent() {
         LocalListData.map((food, i) => (
           <FoodDialog
             name={food.name}
+            foodImage={food.foodImage}
             price={food.price}
             description={food.description}
             tastes={food.tastes}

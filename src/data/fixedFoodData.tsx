@@ -1,12 +1,14 @@
 
-
-
-
+import Fork from '../assets/fork-knife-bold.svg';
+import Pizza from '../assets/pizza-bold.svg';
+import Tapioca from '../assets/Tapioca icon.svg';
+import Bebida from '../assets/beer-bottle-bold.svg';
 export const LocalListData:Array<foodDialogProps> = [
     {
         name:'Pastel frito na hora',
         type:'pastel',
         price:7.00,
+        foodImage:Pizza,
         tastes:[
             {
                 tasteName:'Carne Moída',
@@ -42,6 +44,7 @@ export const LocalListData:Array<foodDialogProps> = [
         name:'Tapioca doce',
         price: 0.00,
         type:'tapioca',
+        foodImage:Tapioca,
         tastes:[
             {
                 tasteName:'Banana, côco e canela',
@@ -69,6 +72,7 @@ export const LocalListData:Array<foodDialogProps> = [
     {
         name:'Tapioca salgada',
         price:0.00,
+        foodImage:Tapioca,
         tastes:[
             {
                 tasteName:'Côco',
@@ -141,6 +145,8 @@ export const LocalListData:Array<foodDialogProps> = [
     {
         name:'Janta',
         price:0,
+        foodImage:Fork,
+        
         tastes:[
             {
                 tasteName:"Caldo de sopa 500ML",
@@ -172,6 +178,7 @@ export const LocalListData:Array<foodDialogProps> = [
         name:"Cachorro quente",
         price:0.00,
         type:'tapioca',
+        foodImage:Pizza,
         tastes:[
             {
                 tasteName:"Cachorro quente",
@@ -183,6 +190,7 @@ export const LocalListData:Array<foodDialogProps> = [
         name:'Bebidas',
         price:0,
         type:'bebida',
+        foodImage:Bebida,
         tastes:[
             {
                 tasteName:'Dore 200ML - Cola',
