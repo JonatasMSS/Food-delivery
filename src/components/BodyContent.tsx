@@ -1,8 +1,7 @@
 import { Food } from "./Food";
 import { FoodDialog } from "./dialogs/FoodDialog";
 import { LocalListData } from "../data/fixedFoodData";
-import { LocalStorageController } from "../data/localDataStorageController";
-import { FoodToOrder } from "../models/foodModel";
+
 
 export function BodyContent() {
 

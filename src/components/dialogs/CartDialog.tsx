@@ -4,19 +4,20 @@ import Carrinho from '../../assets/shoppingcart.svg';
 import BlackCarrinho from '../../assets/shoppingcart-black.svg';
 import { ArrowLeft, } from 'phosphor-react';
 import { CartFoodContainer } from "../CartFoodContainer";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FoodToOrder } from "../../models/foodModel";
 import { LocalStorageController } from "../../data/localDataStorageController";
 import { PersonAddressDialog } from "./PersonAddressDialog";
+import MainContext from "../context/MainContext";
 
 
 
 export function CartDialog() {
 
 
+    const {setValue} = useContext(MainContext);
 
-
-    const localDataStorage = new LocalStorageController();
+    const localDataStorage = new LocalStorageController(setValue);
     const [foodsInCart, setFoodsInCart] = useState<FoodToOrder[]>([]);
     const [totalValue, setTotalValue] = useState<number>(0);
     const [isOpen, setIsOpen] = useState<boolean>(false);

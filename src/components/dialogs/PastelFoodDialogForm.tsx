@@ -1,13 +1,16 @@
 import BlackShoppingCart from '../../assets/shoppingcart-black.svg';
 import Bag from '../../assets/bag.svg';
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import { CheckboxFoodItem } from "../CheckboxFoodItem";
 import { FoodToOrder } from '../../models/foodModel';
 import { LocalStorageController } from '../../data/localDataStorageController';
+import MainContext from '../context/MainContext';
 
 export function PastelFoodDialogForm({tastes,foodPriceWithoutTastesAndExtras,baseTasteName }: foodDialogFormProps) {
     
-    const localDataStorage = new LocalStorageController();
+    const {setValue} = useContext(MainContext);
+
+    const localDataStorage = new LocalStorageController(setValue);
 
     const tastesToForm = tastes.map(taste => {
        return {

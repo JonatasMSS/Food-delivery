@@ -2,16 +2,14 @@ import Whatsapp from '../assets/whatsapp.svg';
 import Instagram from '../assets/instagram.svg';
 import Logo from '../assets/Logo.svg';
 import { CartDialog } from './dialogs/CartDialog';
-import { FoodToOrder } from '../models/foodModel';
-import { LocalStorageController } from '../data/localDataStorageController';
-import { useEffect } from 'react';
+
+import { useContext, useEffect } from 'react';
+import MainContext from './context/MainContext';
 
 export function Header() {
 
-  const FoodsCartInStorage = new LocalStorageController();
-
+  const {value} = useContext(MainContext);
   
-
   return (
     <div className='flex justify-between w-screen bg-zinc-800 p-2'>
       <div className='flex gap-2 '>
@@ -23,9 +21,11 @@ export function Header() {
       </div>
       <div className='p-2 my-2 rounded-lg  items-center bg-softWhite'>
         <CartDialog/>
-        <div className=' flex items-center justify-center text-white w-8 h-8 bg-defaultRed rounded-full'>
-          {FoodsCartInStorage.getDataFromStorage('foods')?.length}
+        {
+          value! > 0 && <div className='absolute right-[75px] top-10 flex items-center justify-center text-white w-8 h-8 bg-defaultRed rounded-full'>
+          {value}
         </div>
+        }
       </div>
     </div>
   )
