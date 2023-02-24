@@ -2,9 +2,9 @@
 import '../src/styles/global.css';
 import { Header } from './components/Header';
 import Logo from './assets/Logo.svg';
-import { Food } from './components/Food';
+
 import { BodyContent } from './components/BodyContent';
-import { PersonAddressDialog } from './components/dialogs/PersonAddressDialog';
+
 
 function App() {
   return (

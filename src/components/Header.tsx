@@ -23,6 +23,9 @@ export function Header() {
       </div>
       <div className='p-2 my-2 rounded-lg  items-center bg-softWhite'>
         <CartDialog/>
+        <div className=' flex items-center justify-center text-white w-8 h-8 bg-defaultRed rounded-full'>
+          {FoodsCartInStorage.getDataFromStorage('foods')?.length}
+        </div>
       </div>
     </div>
   )
