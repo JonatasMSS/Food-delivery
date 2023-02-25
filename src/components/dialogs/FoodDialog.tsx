@@ -1,6 +1,6 @@
 
 import * as Dialog from '@radix-ui/react-dialog';
-import { ArrowLeft, Check } from 'phosphor-react';
+import { ArrowLeft } from 'phosphor-react';
 import { Hamburger } from "phosphor-react";
 import { Food } from '../Food';
 import { PastelFoodDialogForm } from './PastelFoodDialogForm';

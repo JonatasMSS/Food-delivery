@@ -11,9 +11,11 @@ export function Header() {
   
   return (
     <div className='flex justify-between w-screen bg-zinc-800 p-2'>
-      <div className='flex gap-2 '>
+      <div className='flex gap-2 items-center'>
         <img src={Whatsapp} className='w-8' />
-        <img src={Instagram} className='w-8' />
+        <a href="https://www.instagram.com/oxe.ieluizdatapioca/" target='_blank'>
+         <img src={Instagram} className='w-8' />
+        </a>
       </div>
       <div>
         <img src={Logo} alt="Logo do app" className='w-12' />
