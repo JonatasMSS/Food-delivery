@@ -160,7 +160,7 @@ export function PersonAddressDialog({ isOpen = false, changeOpenState,setIsOpen,
             >
                 <Dialog.Overlay className="bg-black/80 inset-0 fixed" />
 
-                <Dialog.Content className="fixed rounded-lg inset-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] overflow-y-clip bg-white ">
+                <Dialog.Content className="fixed rounded-lg inset-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[355px] h-[90%] overflow-y-clip bg-white ">
                     <Dialog.Title className="bg-defaultBackground  rounded-t-lg flex items-center p-2">
                         <Dialog.Close onClick={() => setTaxeInFormValue(0)}>
                             <ArrowLeft size={22} weight="bold" color="white" />

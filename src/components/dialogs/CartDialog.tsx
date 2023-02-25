@@ -62,7 +62,7 @@ export function CartDialog() {
 
                 >
                     <Dialog.Overlay className="bg-black/80 inset-0 fixed" />
-                    <Dialog.Content className="fixed rounded-lg  w-[95%]  bg-softWhite top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <Dialog.Content className="fixed rounded-lg  w-[375px]  bg-softWhite top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                         <Dialog.Title className="bg-defaultBackground w-full text-white px-7 py-2 font-roboto-condensed font-bold text-xl">
                             <Dialog.Close
                                 onClick={() => { setIsOpen(false) }}
