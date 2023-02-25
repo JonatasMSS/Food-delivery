@@ -2,7 +2,6 @@ import Whatsapp from '../assets/whatsapp.svg';
 import Instagram from '../assets/instagram.svg';
 import Logo from '../assets/Logo.svg';
 import { CartDialog } from './dialogs/CartDialog';
-
 import { useContext, useEffect } from 'react';
 import MainContext from './context/MainContext';
 
