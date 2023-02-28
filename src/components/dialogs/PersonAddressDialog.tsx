@@ -140,7 +140,7 @@ export function PersonAddressDialog({ isOpen = false, changeOpenState,setIsOpen,
             },
             orderValue:finalOrderValue
         })
-        sendToWhatsApp(5583987141424,Order);
+        // sendToWhatsApp(5583987141424,Order);
         localStorage.clear();
        
     }
